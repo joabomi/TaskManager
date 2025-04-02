@@ -2,7 +2,7 @@
 
 namespace TaskManager.Application.Contracts.Persistence
 {
-    public interface IWorkTaskPriorityRepository : IGenericRepository<WorkTaskPriority>
+    public interface IWorkTaskPriorityRepository : IGenericRepository<WorkTaskPriorityType>
     {
 
     }

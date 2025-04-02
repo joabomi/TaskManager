@@ -2,7 +2,7 @@
 
 namespace TaskManager.Domain;
 
-public class WorkTaskStatus: BaseEntity
+public class WorkTaskStatusType: BaseEntity
 {
     public string Name { get; set; } = string.Empty;
 }

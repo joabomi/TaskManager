@@ -2,7 +2,7 @@
 
 namespace TaskManager.Domain;
 
-public class WorkTaskPriority: BaseEntity
+public class WorkTaskPriorityType: BaseEntity
 {
     public string Name {  get; set; } = string.Empty;
     public int PriorityWeight { get; set; }
