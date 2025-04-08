@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using TaskManager.Domain;
 using TaskManager.Application.Features.WorkTask.Queries.GetAllWorkTasks;
+using TaskManager.Application.Features.WorkTask.Queries.GetWorkTaskDetails;
 
 namespace TaskManager.Application.MappingProfilesh;
 

@@ -1,0 +1,18 @@
+﻿using Microsoft.EntityFrameworkCore;
+using TaskManager.Application.Contracts.Persistence;
+using TaskManager.Domain;
+using TaskManager.Persistance.DatabaseContext;
+
+namespace TaskManager.Persistance.Repositories;
+
+public class WorkTaskPriorityTypeRepository : GenericRepository<WorkTaskPriorityType>, IWorkTaskPriorityTypeRepository
+{
+    public WorkTaskPriorityTypeRepository(TaskManagerDatabaseContext context) : base(context)
+    {
+    }
+
+    public async Task<bool> IsWorkPriorityTypeUnique(string name)
+    {
+        return !await _context.WorkTaskPriorityTypes.AnyAsync(q => q.Name == name);
+    }
+}
