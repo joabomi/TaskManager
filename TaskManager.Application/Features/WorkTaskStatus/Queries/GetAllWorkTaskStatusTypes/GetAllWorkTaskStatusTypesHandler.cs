@@ -12,9 +12,9 @@ namespace TaskManager.Application.Features.WorkTaskStatus.Queries.GetAllWorkTask
 public class GetAllWorkTaskStatusTypesHandler : IRequestHandler<GetAllWorkTaskStatusTypesQuery, List<WorkTaskStatusTypeDto>>
 {
     private readonly IMapper _mapper;
-    private readonly IWorkTaskStatusRepository _workTaskStatusRepository;
+    private readonly IWorkTaskPriorityTypeRepository _workTaskStatusRepository;
 
-    public GetAllWorkTaskStatusTypesHandler(IMapper mapper, IWorkTaskStatusRepository workTaskStatusRepository)
+    public GetAllWorkTaskStatusTypesHandler(IMapper mapper, IWorkTaskPriorityTypeRepository workTaskStatusRepository)
     {
         _mapper = mapper;
         _workTaskStatusRepository = workTaskStatusRepository;

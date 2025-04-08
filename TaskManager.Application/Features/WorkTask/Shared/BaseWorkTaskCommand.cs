@@ -3,22 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TaskManager.Domain.Common;
 
-namespace TaskManager.Domain;
+namespace TaskManager.Application.Features.WorkTask.Shared;
 
-public class WorkTask : BaseEntity
+public abstract class BaseWorkTaskCommand
 {
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
-    public WorkTaskStatusType? Status { get; set; }
     public int StatusId { get; set; }
-    public WorkTaskPriorityType? Priority { get; set; }
     public int PriorityId { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
-    public string AssignedEmployeeId { get; set; } = string.Empty;
-
-    //public TaskUser User { get; set; }
-    //public bool Asigned { get; set; }
 }

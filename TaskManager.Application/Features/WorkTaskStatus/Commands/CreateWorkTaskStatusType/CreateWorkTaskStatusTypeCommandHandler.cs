@@ -8,23 +8,24 @@ using AutoMapper;
 using MediatR;
 using TaskManager.Application.Contracts.Persistence;
 
-namespace TaskManager.Application.Features.WorkTaskStatus.Command.CreateWorkStatusType;
+namespace TaskManager.Application.Features.WorkTaskStatus.Commands.CreateWorkTaskStatusType;
 
-public class CreateWorkStatusTypeCommandHandler : IRequestHandler<CreateWorkStatusTypeCommand, int>
+public class CreateWorkTaskStatusTypeCommandHandler : IRequestHandler<CreateWorkTaskStatusTypeCommand, int>
 {
     private readonly Mapper _mapper;
-    private readonly IWorkTaskStatusRepository _workTaskStatusRepository;
+    private readonly IWorkTaskStatusTypeRepository _workTaskStatusRepository;
 
-    public CreateWorkStatusTypeCommandHandler(Mapper mapper, IWorkTaskStatusRepository workTaskStatusRepository)
+    public CreateWorkTaskStatusTypeCommandHandler(Mapper mapper, IWorkTaskStatusTypeRepository workTaskStatusRepository)
     {
         _mapper = mapper;
         _workTaskStatusRepository = workTaskStatusRepository;
     }
 
-    public async Task<int> Handle(CreateWorkStatusTypeCommand request, CancellationToken cancellationToken)
+    public async Task<int> Handle(CreateWorkTaskStatusTypeCommand request, CancellationToken cancellationToken)
     {
         //Validate data incoming
-
+        var validator = new CreateWorkTaskStatusTypeCommandValidator(_workTaskStatusRepository);
+        var validatorResult = await validator.ValidateAsync(request);
         //Convert to domain entity object
         var workStatusTypeToCreate = _mapper.Map<Domain.WorkTaskStatusType>(request);
         //add to database

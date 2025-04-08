@@ -6,22 +6,21 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
 using TaskManager.Application.Contracts.Persistence;
-using TaskManager.Application.Features.WorkTaskStatus.Command.UpdateWorkStatusType;
 
-namespace TaskManager.Application.Features.WorkTaskStatus.Command.DeleteWorkStatusType;
+namespace TaskManager.Application.Features.WorkTaskStatus.Commands.DeleteWorkTaskStatusType;
 
-internal class DeleteWorkStatusTypeCommandHandler : IRequestHandler<DeleteWorkStatusTypeCommand, Unit>
+internal class DeleteWorkTaskStatusTypeCommandHandler : IRequestHandler<DeleteWorkTaskStatusTypeCommand, Unit>
 {
     private readonly Mapper _mapper;
-    private readonly IWorkTaskStatusRepository _workTaskStatusRepository;
+    private readonly IWorkTaskStatusTypeRepository _workTaskStatusRepository;
 
-    public DeleteWorkStatusTypeCommandHandler(Mapper mapper, IWorkTaskStatusRepository workTaskStatusRepository)
+    public DeleteWorkTaskStatusTypeCommandHandler(Mapper mapper, IWorkTaskStatusTypeRepository workTaskStatusRepository)
     {
         _mapper = mapper;
         _workTaskStatusRepository = workTaskStatusRepository;
     }
 
-    public async Task<Unit> Handle(DeleteWorkStatusTypeCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(DeleteWorkTaskStatusTypeCommand request, CancellationToken cancellationToken)
     {
         //Validate data incoming
 

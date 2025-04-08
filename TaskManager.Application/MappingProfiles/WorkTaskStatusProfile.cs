@@ -10,7 +10,7 @@ using TaskManager.Application.Features.WorkTaskStatus.Queries.GetWorkTaskStatusT
 
 namespace TaskManager.Application.MappingProfilesh;
 
-internal class WorkTaskStatusProfile : Profile
+public class WorkTaskStatusProfile : Profile
 {
     public WorkTaskStatusProfile()
     {

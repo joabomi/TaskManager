@@ -13,9 +13,9 @@ namespace TaskManager.Application.Features.WorkTaskStatus.Queries.GetWorkTaskSta
 public class GetWorkTaskStatusTypeDetailsHandler : IRequestHandler<GetWorkTaskStatusTypeDetailsQuery, WorkTaskStatusTypeDetailsDto>
 {
     private readonly Mapper _mapper;
-    private readonly IWorkTaskStatusRepository _workTaskStatusRepository;
+    private readonly IWorkTaskPriorityTypeRepository _workTaskStatusRepository;
 
-    public GetWorkTaskStatusTypeDetailsHandler(Mapper mapper, IWorkTaskStatusRepository workTaskStatusRepository)
+    public GetWorkTaskStatusTypeDetailsHandler(Mapper mapper, IWorkTaskPriorityTypeRepository workTaskStatusRepository)
     {
         _mapper = mapper;
         _workTaskStatusRepository = workTaskStatusRepository;

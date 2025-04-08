@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace TaskManager.Application.Features.WorkTaskStatus.Command.CreateWorkStatusType;
+namespace TaskManager.Application.Features.WorkTaskStatus.Commands.UpdateWorkTaskStatusType;
 
-public class CreateWorkStatusTypeCommand : IRequest<int>
+public class UpdateWorkTaskStatusTypeCommand : IRequest<Unit>
 {
+    public int Id { get; set; }
     public string Name { get; set; } = string.Empty;
 }
