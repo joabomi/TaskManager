@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using FluentValidation;
 using TaskManager.Application.Contracts.Persistence;
 using TaskManager.Application.Features.WorkTask.Shared;
-using TaskManager.Application.Features.WorkTaskPriority.Commands.CreateWorkTaskPriorityType;
+using TaskManager.Application.Features.WorkTaskPriorityType.Commands.CreateWorkTaskPriorityType;
 
 namespace TaskManager.Application.Features.WorkTask.Commands.CreateWorkTask;
 

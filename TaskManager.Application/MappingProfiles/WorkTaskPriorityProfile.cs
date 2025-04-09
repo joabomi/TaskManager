@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using TaskManager.Domain;
-using TaskManager.Application.Features.WorkTaskPriority.Queries.GetWorkTaskPriorityDetails;
-using TaskManager.Application.Features.WorkTaskPriority.Queries.GetAllWorkTaskPriorityTypes;
+using TaskManager.Application.Features.WorkTaskPriorityType.Queries.GetWorkTaskPriorityDetails;
+using TaskManager.Application.Features.WorkTaskPriorityType.Queries.GetAllWorkTaskPriorityTypes;
 
 namespace TaskManager.Application.MappingProfilesh;
 

@@ -26,6 +26,8 @@ public class UpdateWorkTaskCommandValidator : AbstractValidator<UpdateWorkTaskCo
         RuleFor(p => p.Id)
             .NotNull()
             .MustAsync(WorkTaskMustExist).WithMessage("{PropertyName} does not exist");
+
+        //to do: validate assigned person
     }
 
     private async Task<bool> WorkTaskMustExist(int id, CancellationToken token)

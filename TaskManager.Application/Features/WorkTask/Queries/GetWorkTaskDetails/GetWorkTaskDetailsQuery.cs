@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MediatR;
-using TaskManager.Application.Features.WorkTaskStatus.Queries.GetWorkTaskStatusTypeDetails;
+using TaskManager.Application.Features.WorkTaskStatusType.Queries.GetWorkTaskStatusTypeDetails;
 
 namespace TaskManager.Application.Features.WorkTask.Queries.GetWorkTaskDetails;
 

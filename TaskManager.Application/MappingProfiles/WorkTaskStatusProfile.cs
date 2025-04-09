@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using TaskManager.Domain;
-using TaskManager.Application.Features.WorkTaskStatus.Queries.GetAllWorkTaskStatusTypes;
-using TaskManager.Application.Features.WorkTaskStatus.Queries.GetWorkTaskStatusTypeDetails;
+using TaskManager.Application.Features.WorkTaskStatusType.Queries.GetAllWorkTaskStatusTypes;
+using TaskManager.Application.Features.WorkTaskStatusType.Queries.GetWorkTaskStatusTypeDetails;
 
 namespace TaskManager.Application.MappingProfilesh;
 
