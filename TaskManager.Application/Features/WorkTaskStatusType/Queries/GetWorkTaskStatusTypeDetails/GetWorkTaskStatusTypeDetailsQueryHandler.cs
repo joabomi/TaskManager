@@ -7,18 +7,20 @@ using AutoMapper;
 using MediatR;
 using TaskManager.Application.Contracts.Logging;
 using TaskManager.Application.Contracts.Persistence;
+using TaskManager.Application.Exceptions;
 using TaskManager.Application.Features.WorkTaskStatusType.Queries.GetAllWorkTaskStatusTypes;
+using TaskManager.Domain;
 
 namespace TaskManager.Application.Features.WorkTaskStatusType.Queries.GetWorkTaskStatusTypeDetails;
 
 public class GetWorkTaskStatusTypeDetailsQueryHandler : IRequestHandler<GetWorkTaskStatusTypeDetailsQuery, WorkTaskStatusTypeDetailsDto>
 {
     private readonly IMapper _mapper;
-    private readonly IWorkTaskPriorityTypeRepository _workTaskStatusRepository;
+    private readonly IWorkTaskStatusTypeRepository _workTaskStatusRepository;
     private readonly IAppLogger<GetWorkTaskStatusTypeDetailsQueryHandler> _logger;
 
     public GetWorkTaskStatusTypeDetailsQueryHandler(IMapper mapper,
-        IWorkTaskPriorityTypeRepository workTaskStatusRepository,
+        IWorkTaskStatusTypeRepository workTaskStatusRepository,
         IAppLogger<GetWorkTaskStatusTypeDetailsQueryHandler> logger)
     {
         _mapper = mapper;
@@ -30,6 +32,8 @@ public class GetWorkTaskStatusTypeDetailsQueryHandler : IRequestHandler<GetWorkT
     {
         //query the database
         var workTaskStatusTypeDetails = await _workTaskStatusRepository.GetByIdAsync(request.Id);
+        if (workTaskStatusTypeDetails == null)
+            throw new NotFoundException(nameof(workTaskStatusTypeDetails), request.Id);
         //convert data to DTO
         var ret_val = _mapper.Map<WorkTaskStatusTypeDetailsDto>(workTaskStatusTypeDetails);
         //return list DTO objects

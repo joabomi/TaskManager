@@ -19,8 +19,8 @@ public class WorkTaskPriorityTypeConfiguration : IEntityTypeConfiguration<WorkTa
                 Id = 1,
                 Name = "Name",
                 PriorityWeight = 0,
-                CreationDate = DateTime.Now,
-                LastModificationDate = DateTime.Now,
+                CreationDate = new DateTime(2024, 01, 01),
+                LastModificationDate = new DateTime(2024, 01, 01),
             }
         );
 

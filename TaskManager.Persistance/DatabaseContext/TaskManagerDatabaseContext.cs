@@ -35,7 +35,7 @@ public class TaskManagerDatabaseContext: DbContext
         {
             entry.Entity.LastModificationDate = DateTime.Now;
 
-            if (entry.State == EntityState.Modified)
+            if (entry.State == EntityState.Added)
             {
                 entry.Entity.CreationDate = DateTime.Now;
             }

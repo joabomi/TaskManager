@@ -13,17 +13,29 @@ public class WorkTaskConfiguration : IEntityTypeConfiguration<WorkTask>
 {
     public void Configure(EntityTypeBuilder<WorkTask> builder)
     {
-        //to do:
-        //builder.HasData(
-        //    new WorkTask
-        //    {
-        //        Id = 1,
-        //        Name = "Name",
-        //        Description = "Description",
-        //        StatusId = 1,
-        //        Status
-        //    }
-        //);
+        builder.HasData(
+            new WorkTask
+            {
+                Id = 1,
+                Name = "Name",
+                Description = "Description",
+                CreationDate = new DateTime(2024, 01, 01),
+                LastModificationDate = new DateTime(2024, 01, 01),
+                PriorityId = 1,
+                StatusId = 1,
+                StartDate = new DateTime(2024, 01, 01),
+                EndDate = new DateTime(2024, 01, 01),
+            }
+        );
 
+        builder.Property(q => q.Name)
+            .IsRequired()
+            .HasMaxLength(100);
+
+        builder.Property(q => q.PriorityId)
+            .IsRequired();
+
+        builder.Property(q => q.StatusId)
+            .IsRequired();
     }
 }

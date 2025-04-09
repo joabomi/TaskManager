@@ -27,6 +27,12 @@ public class UpdateWorkTaskPriorityTypeCommandValidator : AbstractValidator<Upda
 
         RuleFor(p => p)
             .MustAsync(WorkStatusTypeNameUnique).WithMessage("Work Status Type already exists");
+
+        RuleFor(p => p.PriorityWeight)
+            .NotEmpty().WithMessage("{PropertyName} is required")
+            .NotNull()
+            .GreaterThanOrEqualTo(0).WithMessage("{PropertyName} cannot be less than 0")
+            .LessThanOrEqualTo(1000).WithMessage("{PropertyName} cannot exceed 1000"); ;
     }
 
     private async Task<bool> WorkTaskPriorityTypeMustExist(int id, CancellationToken token)

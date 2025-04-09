@@ -18,8 +18,8 @@ public class WorkTaskStatusTypeConfiguration : IEntityTypeConfiguration<WorkTask
             {
                 Id = 1,
                 Name = "Name",
-                CreationDate = DateTime.Now,
-                LastModificationDate = DateTime.Now
+                CreationDate = new DateTime(2024, 01, 01),
+                LastModificationDate = new DateTime(2024, 01, 01),
             }
         );
 

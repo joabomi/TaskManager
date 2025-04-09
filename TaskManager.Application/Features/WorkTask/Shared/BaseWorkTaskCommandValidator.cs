@@ -29,10 +29,10 @@ public class BaseWorkTaskCommandValidator : AbstractValidator<BaseWorkTaskComman
             .MaximumLength(500).WithMessage("{PropertyName} must be fewer than 500 characters");
 
         RuleFor(p => p.StartDate)
-            .GreaterThanOrEqualTo(p => p.EndDate).WithMessage("{PropertyName} must be before {ComparisonValue}.");
+            .LessThanOrEqualTo(p => p.EndDate).WithMessage("{PropertyName} must be before {ComparisonValue}.");
 
         RuleFor(p => p.EndDate)
-            .LessThanOrEqualTo(p => p.StartDate).WithMessage("{PropertyName} must be after {ComparisonValue}.");
+            .GreaterThanOrEqualTo(p => p.StartDate).WithMessage("{PropertyName} must be after {ComparisonValue}.");
 
         RuleFor(p => p.PriorityId)
             .GreaterThanOrEqualTo(0)

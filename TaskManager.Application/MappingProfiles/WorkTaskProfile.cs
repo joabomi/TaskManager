@@ -2,6 +2,9 @@
 using TaskManager.Domain;
 using TaskManager.Application.Features.WorkTask.Queries.GetAllWorkTasks;
 using TaskManager.Application.Features.WorkTask.Queries.GetWorkTaskDetails;
+using TaskManager.Application.Features.WorkTask.Commands.CreateWorkTask;
+using TaskManager.Application.Features.WorkTask.Commands.UpdateWorkTask;
+using TaskManager.Application.Features.WorkTask.Commands.DeleteWorkTask;
 
 namespace TaskManager.Application.MappingProfilesh;
 
@@ -11,5 +14,8 @@ public class WorkTaskProfile : Profile
     {
         CreateMap<WorkTaskDto, WorkTask>().ReverseMap();
         CreateMap<WorkTask, WorkTaskDetailsDto>();
+        CreateMap<CreateWorkTaskCommand, WorkTask>();
+        CreateMap<UpdateWorkTaskCommand, WorkTask>();
+        CreateMap<DeleteWorkTaskCommand, WorkTask>();
     }
 }
