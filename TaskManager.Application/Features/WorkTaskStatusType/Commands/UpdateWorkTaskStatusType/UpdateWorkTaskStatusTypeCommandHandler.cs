@@ -30,8 +30,14 @@ public class UpdateWorkTaskStatusTypeCommandHandler: IRequestHandler<UpdateWorkT
     public async Task<Unit> Handle(UpdateWorkTaskStatusTypeCommand request, CancellationToken cancellationToken)
     {
         //Validate data incoming
+
+        var workTaskStatusType_exist = await _workTaskStatusTypeRepository.GetByIdAsync(request.Id);
+        if (workTaskStatusType_exist == null)
+            throw new NotFoundException(nameof(workTaskStatusType_exist), request.Id);
+
         var validator = new UpdateWorkTaskStatusTypeCommandValidator(_workTaskStatusTypeRepository);
         var validationResult = await validator.ValidateAsync(request);
+
 
         if (validationResult.Errors.Any())
         {
