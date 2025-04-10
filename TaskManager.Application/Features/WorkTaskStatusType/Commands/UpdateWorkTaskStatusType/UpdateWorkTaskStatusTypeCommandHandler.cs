@@ -30,6 +30,8 @@ public class UpdateWorkTaskStatusTypeCommandHandler: IRequestHandler<UpdateWorkT
     public async Task<Unit> Handle(UpdateWorkTaskStatusTypeCommand request, CancellationToken cancellationToken)
     {
         //Validate data incoming
+        if (request.Id < 0)
+            throw new BadRequestException("Id not provided");
 
         var workTaskStatusType_exist = await _workTaskStatusTypeRepository.GetByIdAsync(request.Id);
         if (workTaskStatusType_exist == null)

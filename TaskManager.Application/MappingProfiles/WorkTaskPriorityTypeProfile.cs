@@ -8,9 +8,9 @@ using TaskManager.Application.Features.WorkTaskPriorityType.Commands.CreateWorkT
 
 namespace TaskManager.Application.MappingProfilesh;
 
-public class WorkTaskPriorityProfile : Profile
+public class WorkTaskPriorityTypeProfile : Profile
 {
-    public WorkTaskPriorityProfile()
+    public WorkTaskPriorityTypeProfile()
     {
         CreateMap<WorkTaskPriorityTypeDto, WorkTaskPriorityType>().ReverseMap();
         CreateMap<WorkTaskPriorityType, WorkTaskPriorityTypeDetailsDto>();

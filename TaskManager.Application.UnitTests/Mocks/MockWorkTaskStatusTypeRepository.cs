@@ -80,9 +80,9 @@ public class MockWorkTaskStatusTypeRepository
             });
 
         mockRepo.Setup(r => r.DeleteAsync(It.IsAny<WorkTaskStatusType>()))
-            .Returns((int id) =>
+            .Returns((WorkTaskStatusType workTaskStatusType) =>
             {
-                workTaskStatusTypes.RemoveAll(w => w.Id == id);
+                workTaskStatusTypes.RemoveAll(w => w.Id == workTaskStatusType.Id);
                 return Task.CompletedTask;
             });
 

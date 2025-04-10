@@ -9,6 +9,6 @@ namespace TaskManager.Application.Features.WorkTaskStatusType.Commands.UpdateWor
 
 public class UpdateWorkTaskStatusTypeCommand : IRequest<Unit>
 {
-    public int Id { get; set; }
+    public int Id { get; set; } = -1;
     public string Name { get; set; } = string.Empty;
 }

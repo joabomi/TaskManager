@@ -43,7 +43,7 @@ public class CreateWorkTaskStatusTypeCommandHandlerTests
         _mockRepo.Object.GetAsync().Result.Count.ShouldBe(inintialItemsCount + 1);
 
         //added item validation
-        var addedItem = _mockRepo.Object.GetAsync().Result.Last(); // El último elemento añadido
+        var addedItem = _mockRepo.Object.GetAsync().Result.Last();
         addedItem.Name.ShouldBe("Test_Item");
         addedItem.Id.ShouldBe(7);
     }

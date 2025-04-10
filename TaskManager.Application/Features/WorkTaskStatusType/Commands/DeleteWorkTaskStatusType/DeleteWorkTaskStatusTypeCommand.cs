@@ -9,5 +9,5 @@ namespace TaskManager.Application.Features.WorkTaskStatusType.Commands.DeleteWor
 
 public class DeleteWorkTaskStatusTypeCommand : IRequest<Unit>
 {
-    public int Id { get; set; }
+    public int Id { get; set; } = -1;
 }

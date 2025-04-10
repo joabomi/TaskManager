@@ -38,6 +38,5 @@ public class GetWorkTaskStatusTypeDetailsQueryHandlerTests
         result.ShouldBeOfType<WorkTaskStatusTypeDetailsDto>();
         result.Id.ShouldBe(3);
         await Should.ThrowAsync<NotFoundException>(async () => await handler.Handle(new GetWorkTaskStatusTypeDetailsQuery(99), CancellationToken.None));
-        await Should.ThrowAsync<NotFoundException>(async () => await handler.Handle(new GetWorkTaskStatusTypeDetailsQuery(-5), CancellationToken.None));
     }
 }

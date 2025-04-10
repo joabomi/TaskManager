@@ -12,7 +12,7 @@ using TaskManager.Application.Features.WorkTaskStatusType.Commands.UpdateWorkSta
 
 namespace TaskManager.Application.Features.WorkTaskPriorityType.Commands.UpdateWorkTaskPriorityType
 {
-    internal class UpdateWorkTaskPriorityTypeCommandHandler: IRequestHandler<UpdateWorkTaskPriorityTypeCommand, Unit>
+    public class UpdateWorkTaskPriorityTypeCommandHandler: IRequestHandler<UpdateWorkTaskPriorityTypeCommand, Unit>
     {
         private readonly IMapper _mapper;
         private readonly IWorkTaskPriorityTypeRepository _workTaskPriorityRepository;
@@ -30,6 +30,12 @@ namespace TaskManager.Application.Features.WorkTaskPriorityType.Commands.UpdateW
         public async Task<Unit> Handle(UpdateWorkTaskPriorityTypeCommand request, CancellationToken cancellationToken)
         {
             //Validate data incoming
+            if (request.Id < 0)
+                throw new BadRequestException("Id not provided");
+
+            var workTaskStatusType_exist = await _workTaskPriorityRepository.GetByIdAsync(request.Id);
+            if (workTaskStatusType_exist == null)
+                throw new NotFoundException(nameof(workTaskStatusType_exist), request.Id);
 
             var validator = new UpdateWorkTaskPriorityTypeCommandValidator(_workTaskPriorityRepository);
             var validationResult = await validator.ValidateAsync(request);

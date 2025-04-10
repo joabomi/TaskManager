@@ -9,7 +9,7 @@ namespace TaskManager.Application.Features.WorkTaskPriorityType.Commands.UpdateW
 
 public class UpdateWorkTaskPriorityTypeCommand : IRequest<Unit>
 {
-    public int Id { get; set; }
+    public int Id { get; set; } = -1;
     public string Name { get; set; } = string.Empty;
     public int PriorityWeight { get; set; } = 0;//Higher values indicate higher priority.
 }

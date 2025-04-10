@@ -27,8 +27,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\WorkTasksPriorityTypes\" />
-    <Folder Include="Features\WorkTasks\" />
+    <Folder Include="Features\WorkTasks\Commands\" />
+    <Folder Include="Features\WorkTasks\Queries\" />
   </ItemGroup>
 
 </Project>

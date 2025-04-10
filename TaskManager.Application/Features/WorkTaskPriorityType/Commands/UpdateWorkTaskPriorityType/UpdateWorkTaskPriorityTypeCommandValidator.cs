@@ -43,6 +43,6 @@ public class UpdateWorkTaskPriorityTypeCommandValidator : AbstractValidator<Upda
 
     private async Task<bool> WorkStatusTypeNameUnique(UpdateWorkTaskPriorityTypeCommand command, CancellationToken token)
     {
-        return await _workTaskPriorityTypeRepository.IsWorkPriorityTypeUnique(command.Name);
+        return await _workTaskPriorityTypeRepository.IsWorkPriorityTypeUnique(command.Name, command.PriorityWeight);
     }
 }

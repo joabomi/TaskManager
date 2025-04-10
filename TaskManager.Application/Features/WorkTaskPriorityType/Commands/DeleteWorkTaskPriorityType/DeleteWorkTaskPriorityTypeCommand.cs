@@ -9,5 +9,5 @@ namespace TaskManager.Application.Features.WorkTaskPriorityType.Commands.DeleteW
 
 public class DeleteWorkTaskPriorityTypeCommand : IRequest<Unit>
 {
-    public int Id { get; set; }
+    public int Id { get; set; } = -1;
 }

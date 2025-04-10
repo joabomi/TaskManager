@@ -33,6 +33,6 @@ public class CreateWorkTaskPriorityTypeCommandValidator : AbstractValidator<Crea
 
     private Task<bool> WorkPriorityTypeNameUnique(CreateWorkTaskPriorityTypeCommand command, CancellationToken token)
     {
-        return _workTaskPriorityRepository.IsWorkPriorityTypeUnique(command.Name);
+        return _workTaskPriorityRepository.IsWorkPriorityTypeUnique(command.Name, command.PriorityWeight);
     }
 }

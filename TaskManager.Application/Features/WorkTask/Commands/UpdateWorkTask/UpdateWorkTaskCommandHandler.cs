@@ -38,6 +38,9 @@ public class UpdateWorkTaskCommandHandler : IRequestHandler<UpdateWorkTaskComman
     public async Task<Unit> Handle(UpdateWorkTaskCommand request, CancellationToken cancellationToken)
     {
         //Validate data incoming
+        if (request.Id < 0)
+            throw new BadRequestException("Id not provided");
+
         var workTask = await _workTaskRepository.GetByIdAsync(request.Id);
         if (workTask == null)
             throw new NotFoundException(nameof(workTask), request.Id);

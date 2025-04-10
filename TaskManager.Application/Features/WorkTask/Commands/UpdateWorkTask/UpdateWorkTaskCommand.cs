@@ -11,6 +11,6 @@ namespace TaskManager.Application.Features.WorkTask.Commands.UpdateWorkTask;
 
 public class UpdateWorkTaskCommand : BaseWorkTaskCommand, IRequest<Unit>
 {
-    public int Id { get; set; }
+    public int Id { get; set; } = -1;
     public string AssignedPersonId { get; set; } = string.Empty;
 }

@@ -11,8 +11,8 @@ public class WorkTaskPriorityTypeRepository : GenericRepository<WorkTaskPriority
     {
     }
 
-    public async Task<bool> IsWorkPriorityTypeUnique(string name)
+    public async Task<bool> IsWorkPriorityTypeUnique(string name, int weight)
     {
-        return !await _context.WorkTaskPriorityTypes.AnyAsync(q => q.Name == name);
+        return !await _context.WorkTaskPriorityTypes.AnyAsync(q => q.Name == name || q.PriorityWeight == weight);
     }
 }

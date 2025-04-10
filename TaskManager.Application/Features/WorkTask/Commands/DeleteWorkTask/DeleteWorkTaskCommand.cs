@@ -9,5 +9,5 @@ namespace TaskManager.Application.Features.WorkTask.Commands.DeleteWorkTask;
 
 public class DeleteWorkTaskCommand : IRequest<Unit>
 {
-    public int Id { get; set; }
+    public int Id { get; set; } = -1;
 }
