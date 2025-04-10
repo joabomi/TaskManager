@@ -7,6 +7,7 @@ using AutoMapper;
 using MediatR;
 using TaskManager.Application.Contracts.Logging;
 using TaskManager.Application.Contracts.Persistence;
+using TaskManager.Application.Exceptions;
 using TaskManager.Application.Features.WorkTaskStatusType.Queries.GetWorkTaskStatusTypeDetails;
 
 namespace TaskManager.Application.Features.WorkTask.Queries.GetWorkTaskDetails;
@@ -29,7 +30,13 @@ public class GetWorkTaskDetailsQueryHandler : IRequestHandler<GetWorkTaskDetails
     public async Task<WorkTaskDetailsDto> Handle(GetWorkTaskDetailsQuery request, CancellationToken cancellationToken)
     {
         //query the database
-        var workTaskDetails = await _workTaskRepository.GetWorkTaskWithDetails(request.id);
+        if (request.Id < 0)
+            throw new BadRequestException("Id not provided");
+
+        var workTaskDetails = await _workTaskRepository.GetByIdAsync(request.Id);
+        if (workTaskDetails == null)
+            throw new NotFoundException(nameof(workTaskDetails), request.Id);
+
         //convert data to DTO
         var ret_val = _mapper.Map<WorkTaskDetailsDto>(workTaskDetails);
         //return list DTO objects

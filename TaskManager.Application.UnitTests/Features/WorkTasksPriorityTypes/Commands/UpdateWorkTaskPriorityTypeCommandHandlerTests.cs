@@ -19,7 +19,7 @@ public class UpdateWorkTaskPriorityTypeCommandHandlerTests
 
     public UpdateWorkTaskPriorityTypeCommandHandlerTests()
     {
-        _mockRepo = MockWorkTaskPriorityTypeRepository.GetMockWorkTaskPriorityTypeRespository();
+        _mockRepo = MockWorkTaskPriorityTypeRepository.GetMockWorkTaskPriorityTypeRepository();
         var mapperConfig = new MapperConfiguration(c =>
         {
             c.AddProfile<WorkTaskPriorityTypeProfile>();

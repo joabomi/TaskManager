@@ -21,7 +21,7 @@ public class DeleteWorkTaskStatusTypeCommandHandlerTests
 
     public DeleteWorkTaskStatusTypeCommandHandlerTests()
     {
-        _mockRepo = MockWorkTaskStatusTypeRepository.GetMockWorkTaskStatusTypeRespository();
+        _mockRepo = MockWorkTaskStatusTypeRepository.GetMockWorkTaskStatusTypeRepository();
         var mapperConfig = new MapperConfiguration(c =>
         {
             c.AddProfile<WorkTaskStatusTypeProfile>();

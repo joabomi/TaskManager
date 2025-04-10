@@ -23,7 +23,7 @@ public class WorkTaskRepository : GenericRepository<WorkTask>, IWorkTaskReposito
     public async Task<List<WorkTask>> GetWorkTasksWithDetails(string userId)
     {
         var worktasks = await _context.WorkTasks
-            .Where(q => q.AssignedEmployeeId == userId)
+            .Where(q => q.AssignedPersonId == userId)
             .Include(q => q.Priority)
             .Include(q => q.Status)
             .ToListAsync();

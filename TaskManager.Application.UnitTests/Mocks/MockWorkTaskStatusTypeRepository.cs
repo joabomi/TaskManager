@@ -14,7 +14,7 @@ namespace TaskManager.Application.UnitTests.Mocks;
 
 public class MockWorkTaskStatusTypeRepository
 {
-    public static Mock<IWorkTaskStatusTypeRepository> GetMockWorkTaskStatusTypeRespository()
+    public static Mock<IWorkTaskStatusTypeRepository> GetMockWorkTaskStatusTypeRepository()
     {
         var workTaskStatusTypes = new List<WorkTaskStatusType>()
         {

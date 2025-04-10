@@ -7,5 +7,5 @@ using MediatR;
 
 namespace TaskManager.Application.Features.WorkTaskPriorityType.Queries.GetWorkTaskPriorityDetails
 {
-    public record GetWorkTaskPriorityTypeDetailsQuery(int Id) : IRequest<WorkTaskPriorityTypeDetailsDto>;
+    public record GetWorkTaskPriorityTypeDetailsQuery(int Id = -1) : IRequest<WorkTaskPriorityTypeDetailsDto>;
 }

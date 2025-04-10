@@ -11,6 +11,7 @@ namespace TaskManager.Application.Features.WorkTask.Queries.GetWorkTaskDetails;
 
 public class WorkTaskDetailsDto
 {
+    public int Id { get; set; } = -1;
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public WorkTaskStatusTypeDto? Status { get; set; }

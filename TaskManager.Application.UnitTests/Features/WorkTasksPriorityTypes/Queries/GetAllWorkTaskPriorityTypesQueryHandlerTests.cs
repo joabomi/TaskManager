@@ -23,7 +23,7 @@ public class GetAllWorkTaskPriorityTypesQueryHandlerTests
 
     public GetAllWorkTaskPriorityTypesQueryHandlerTests()
     {
-        _mockRepo = MockWorkTaskPriorityTypeRepository.GetMockWorkTaskPriorityTypeRespository();
+        _mockRepo = MockWorkTaskPriorityTypeRepository.GetMockWorkTaskPriorityTypeRepository();
         var mapperConfig = new MapperConfiguration(c =>
         {
             c.AddProfile<WorkTaskPriorityTypeProfile>();

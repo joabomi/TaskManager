@@ -8,4 +8,4 @@ using TaskManager.Application.Features.WorkTaskStatusType.Queries.GetWorkTaskSta
 
 namespace TaskManager.Application.Features.WorkTask.Queries.GetWorkTaskDetails;
 
-public record GetWorkTaskDetailsQuery(int id) : IRequest<WorkTaskDetailsDto>;
+public record GetWorkTaskDetailsQuery(int Id) : IRequest<WorkTaskDetailsDto>;

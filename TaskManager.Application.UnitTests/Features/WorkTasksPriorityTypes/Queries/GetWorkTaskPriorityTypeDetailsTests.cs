@@ -18,7 +18,7 @@ public class GetWorkTaskPriorityTypeDetailsQueryHandlerTests
 
     public GetWorkTaskPriorityTypeDetailsQueryHandlerTests()
     {
-        _mockRepo = MockWorkTaskPriorityTypeRepository.GetMockWorkTaskPriorityTypeRespository();
+        _mockRepo = MockWorkTaskPriorityTypeRepository.GetMockWorkTaskPriorityTypeRepository();
         var mapperConfig = new MapperConfiguration(c =>
         {
             c.AddProfile<WorkTaskPriorityTypeProfile>();
@@ -37,6 +37,12 @@ public class GetWorkTaskPriorityTypeDetailsQueryHandlerTests
         result.ShouldNotBeNull();
         result.ShouldBeOfType<WorkTaskPriorityTypeDetailsDto>();
         result.Id.ShouldBe(3);
+    }
+
+    [Fact]
+    public async Task GetWorkTaskPriorityTypeDetails_NoExists()
+    {
+        var handler = new GetWorkTaskPriorityTypeDetailsQueryHandler(_mapper, _mockRepo.Object, _mockAppLogger.Object);
         await Should.ThrowAsync<NotFoundException>(async () => await handler.Handle(new GetWorkTaskPriorityTypeDetailsQuery(99), CancellationToken.None));
     }
 }

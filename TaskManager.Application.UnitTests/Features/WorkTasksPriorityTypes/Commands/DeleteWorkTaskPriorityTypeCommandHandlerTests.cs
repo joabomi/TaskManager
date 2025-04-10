@@ -19,7 +19,7 @@ public class DeleteWorkTaskPriorityTypeCommandHandlerTests
 
     public DeleteWorkTaskPriorityTypeCommandHandlerTests()
     {
-        _mockRepo = MockWorkTaskPriorityTypeRepository.GetMockWorkTaskPriorityTypeRespository();
+        _mockRepo = MockWorkTaskPriorityTypeRepository.GetMockWorkTaskPriorityTypeRepository();
         var mapperConfig = new MapperConfiguration(c =>
         {
             c.AddProfile<WorkTaskPriorityTypeProfile>();

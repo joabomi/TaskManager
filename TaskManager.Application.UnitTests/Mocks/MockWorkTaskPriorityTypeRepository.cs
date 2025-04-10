@@ -11,7 +11,7 @@ namespace TaskManager.Application.UnitTests.Mocks;
 
 public class MockWorkTaskPriorityTypeRepository
 {
-    public static Mock<IWorkTaskPriorityTypeRepository> GetMockWorkTaskPriorityTypeRespository()
+    public static Mock<IWorkTaskPriorityTypeRepository> GetMockWorkTaskPriorityTypeRepository()
     {
         var workTaskPriorityTypes = new List<WorkTaskPriorityType>()
         {

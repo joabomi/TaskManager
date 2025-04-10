@@ -18,7 +18,7 @@ public class CreateWorkTaskStatusTypeCommandHandlerTests
 
     public CreateWorkTaskStatusTypeCommandHandlerTests()
     {
-        _mockRepo = MockWorkTaskStatusTypeRepository.GetMockWorkTaskStatusTypeRespository();
+        _mockRepo = MockWorkTaskStatusTypeRepository.GetMockWorkTaskStatusTypeRepository();
         var mapperConfig = new MapperConfiguration(c =>
         {
             c.AddProfile<WorkTaskStatusTypeProfile>();
