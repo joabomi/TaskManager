@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Application.Uni
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Persistance.IntegrationTests", "TaskManager.Persistance.IntegrationTests\TaskManager.Persistance.IntegrationTests.csproj", "{C899DD80-5D47-4974-848C-FC0410E65BEA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.BlazorUI", "TaskManager.BlazorUI\TaskManager.BlazorUI.csproj", "{C349DC8F-2214-4D2A-8077-BA70714EAD25}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{C899DD80-5D47-4974-848C-FC0410E65BEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C899DD80-5D47-4974-848C-FC0410E65BEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C899DD80-5D47-4974-848C-FC0410E65BEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C349DC8F-2214-4D2A-8077-BA70714EAD25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C349DC8F-2214-4D2A-8077-BA70714EAD25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C349DC8F-2214-4D2A-8077-BA70714EAD25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C349DC8F-2214-4D2A-8077-BA70714EAD25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,6 +85,7 @@ Global
 		{B35A8135-2437-42C2-BF6B-BC1C3DBFF730} = {A106B3EB-2ABD-4F69-BFF8-929849B06A4F}
 		{C13C1911-0E52-48A6-9609-1AC1BC9B7665} = {55283937-CD2E-4070-A20C-A1E48977755B}
 		{C899DD80-5D47-4974-848C-FC0410E65BEA} = {55283937-CD2E-4070-A20C-A1E48977755B}
+		{C349DC8F-2214-4D2A-8077-BA70714EAD25} = {18A3DFCE-8546-4CCE-9DDD-6389D5E41710}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0A151CE1-411A-4B80-93C4-D36F07DE99AF}
