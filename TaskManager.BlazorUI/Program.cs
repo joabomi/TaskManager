@@ -1,3 +1,4 @@
+using System.Reflection;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using TaskManager.BlazorUI;
@@ -17,5 +18,7 @@ builder.Services.AddHttpClient<IClient, Client>(Client => Client.BaseAddress = n
 builder.Services.AddScoped<IWorkTaskService, WorkTaskService>();
 builder.Services.AddScoped<IWorkTaskStatusTypeService, WorkTaskStatusTypeService>();
 builder.Services.AddScoped<IWorkTaskPriorityTypeService, WorkTaskPriorityTypeService>();
+
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 await builder.Build().RunAsync();
