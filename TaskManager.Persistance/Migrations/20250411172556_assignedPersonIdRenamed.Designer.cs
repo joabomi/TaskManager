@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TaskManager.Persistance.DatabaseContext;
 
@@ -11,9 +12,11 @@ using TaskManager.Persistance.DatabaseContext;
 namespace TaskManager.Persistance.Migrations
 {
     [DbContext(typeof(TaskManagerDatabaseContext))]
-    partial class TaskManagerDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20250411172556_assignedPersonIdRenamed")]
+    partial class assignedPersonIdRenamed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

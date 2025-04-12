@@ -13,7 +13,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
 
-builder.Services.AddHttpClient<IClient, Client>(Client => Client.BaseAddress = new Uri("http://localhost:5041"));
+builder.Services.AddHttpClient<IClient, Client>(Client => Client.BaseAddress = new Uri("https://localhost:7269"));
 
 builder.Services.AddScoped<IWorkTaskService, WorkTaskService>();
 builder.Services.AddScoped<IWorkTaskStatusTypeService, WorkTaskStatusTypeService>();

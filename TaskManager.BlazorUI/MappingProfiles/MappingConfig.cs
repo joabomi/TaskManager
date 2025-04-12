@@ -9,8 +9,16 @@ public class MappingConfig : Profile
     public MappingConfig()
     {
         CreateMap<WorkTaskStatusTypeDto, WorkTaskStatusTypeVM>().ReverseMap();
+        CreateMap<WorkTaskStatusTypeDetailsDto, WorkTaskStatusTypeVM>().ReverseMap();
         CreateMap<CreateWorkTaskStatusTypeCommand, WorkTaskStatusTypeVM>().ReverseMap();
         CreateMap<UpdateWorkTaskStatusTypeCommand, WorkTaskStatusTypeVM>().ReverseMap();
-        CreateMap<DeleteWorkTaskStatusTypeCommand, WorkTaskStatusTypeVM>().ReverseMap();
+        CreateMap<WorkTaskPriorityTypeDto, WorkTaskPriorityTypeVM>().ReverseMap();
+        CreateMap<WorkTaskPriorityTypeDetailsDto, WorkTaskPriorityTypeVM>().ReverseMap();
+        CreateMap<CreateWorkTaskPriorityTypeCommand, WorkTaskPriorityTypeVM>().ReverseMap();
+        CreateMap<UpdateWorkTaskPriorityTypeCommand, WorkTaskPriorityTypeVM>().ReverseMap();
+        CreateMap<WorkTaskDto, WorkTaskVM>().ReverseMap();
+        CreateMap<WorkTaskDetailsDto, WorkTaskVM>().ReverseMap();
+        CreateMap<CreateWorkTaskCommand, WorkTaskVM>().ReverseMap();
+        CreateMap<UpdateWorkTaskCommand, WorkTaskVM>().ReverseMap();
     }
 }

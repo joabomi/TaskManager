@@ -42,10 +42,10 @@ public class WorkTasksController : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> Post(CreateWorkTaskCommand workTask)
+    public async Task<ActionResult<int>> Post(CreateWorkTaskCommand workTask)
     {
         var response = await _mediator.Send(workTask);
-        return CreatedAtAction(nameof(Get), new { id = response });
+        return Ok(response);
     }
 
     // PUT api/<WorkTasksController>/5
@@ -66,9 +66,10 @@ public class WorkTasksController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesDefaultResponseType]
-    public async Task<ActionResult> Delete(DeleteWorkTaskCommand workTask)
+    public async Task<ActionResult> Delete(int id)
     {
-        await _mediator.Send(workTask);
+        var command = new DeleteWorkTaskCommand { Id = id };
+        await _mediator.Send(command);
         return NoContent();
     }
 }

@@ -16,6 +16,5 @@ public class WorkTaskPriorityTypeProfile : Profile
         CreateMap<WorkTaskPriorityType, WorkTaskPriorityTypeDetailsDto>();
         CreateMap<CreateWorkTaskPriorityTypeCommand, WorkTaskPriorityType>();
         CreateMap<UpdateWorkTaskPriorityTypeCommand, WorkTaskPriorityType>();
-        CreateMap<DeleteWorkTaskPriorityTypeCommand, WorkTaskPriorityType>();
     }
 }

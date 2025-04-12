@@ -16,6 +16,5 @@ public class WorkTaskProfile : Profile
         CreateMap<WorkTask, WorkTaskDetailsDto>();
         CreateMap<CreateWorkTaskCommand, WorkTask>();
         CreateMap<UpdateWorkTaskCommand, WorkTask>();
-        CreateMap<DeleteWorkTaskCommand, WorkTask>();
     }
 }

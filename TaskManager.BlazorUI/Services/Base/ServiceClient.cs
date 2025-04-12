@@ -38,12 +38,12 @@ namespace TaskManager.BlazorUI.Services.Base
 
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task WorkTaskPriorityTypesPOSTAsync(CreateWorkTaskPriorityTypeCommand body);
+        System.Threading.Tasks.Task<int> WorkTaskPriorityTypesPOSTAsync(CreateWorkTaskPriorityTypeCommand body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task WorkTaskPriorityTypesPOSTAsync(CreateWorkTaskPriorityTypeCommand body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<int> WorkTaskPriorityTypesPOSTAsync(CreateWorkTaskPriorityTypeCommand body, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -65,12 +65,12 @@ namespace TaskManager.BlazorUI.Services.Base
 
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task WorkTaskPriorityTypesDELETEAsync(string id, DeleteWorkTaskPriorityTypeCommand body);
+        System.Threading.Tasks.Task WorkTaskPriorityTypesDELETEAsync(int id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task WorkTaskPriorityTypesDELETEAsync(string id, DeleteWorkTaskPriorityTypeCommand body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task WorkTaskPriorityTypesDELETEAsync(int id, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -83,12 +83,12 @@ namespace TaskManager.BlazorUI.Services.Base
 
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task WorkTasksPOSTAsync(CreateWorkTaskCommand body);
+        System.Threading.Tasks.Task<int> WorkTasksPOSTAsync(CreateWorkTaskCommand body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task WorkTasksPOSTAsync(CreateWorkTaskCommand body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<int> WorkTasksPOSTAsync(CreateWorkTaskCommand body, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -110,12 +110,12 @@ namespace TaskManager.BlazorUI.Services.Base
 
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task WorkTasksDELETEAsync(string id, DeleteWorkTaskCommand body);
+        System.Threading.Tasks.Task WorkTasksDELETEAsync(int id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task WorkTasksDELETEAsync(string id, DeleteWorkTaskCommand body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task WorkTasksDELETEAsync(int id, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -128,12 +128,12 @@ namespace TaskManager.BlazorUI.Services.Base
 
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task WorkTaskStatusTypesPOSTAsync(CreateWorkTaskStatusTypeCommand body);
+        System.Threading.Tasks.Task<int> WorkTaskStatusTypesPOSTAsync(CreateWorkTaskStatusTypeCommand body);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task WorkTaskStatusTypesPOSTAsync(CreateWorkTaskStatusTypeCommand body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<int> WorkTaskStatusTypesPOSTAsync(CreateWorkTaskStatusTypeCommand body, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -155,12 +155,12 @@ namespace TaskManager.BlazorUI.Services.Base
 
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task WorkTaskStatusTypesDELETEAsync(string id, DeleteWorkTaskStatusTypeCommand body);
+        System.Threading.Tasks.Task WorkTaskStatusTypesDELETEAsync(int id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task WorkTaskStatusTypesDELETEAsync(string id, DeleteWorkTaskStatusTypeCommand body, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task WorkTaskStatusTypesDELETEAsync(int id, System.Threading.CancellationToken cancellationToken);
 
     }
 
@@ -276,7 +276,7 @@ namespace TaskManager.BlazorUI.Services.Base
 
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task WorkTaskPriorityTypesPOSTAsync(CreateWorkTaskPriorityTypeCommand body)
+        public virtual System.Threading.Tasks.Task<int> WorkTaskPriorityTypesPOSTAsync(CreateWorkTaskPriorityTypeCommand body)
         {
             return WorkTaskPriorityTypesPOSTAsync(body, System.Threading.CancellationToken.None);
         }
@@ -284,7 +284,7 @@ namespace TaskManager.BlazorUI.Services.Base
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task WorkTaskPriorityTypesPOSTAsync(CreateWorkTaskPriorityTypeCommand body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> WorkTaskPriorityTypesPOSTAsync(CreateWorkTaskPriorityTypeCommand body, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -297,6 +297,7 @@ namespace TaskManager.BlazorUI.Services.Base
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                 
@@ -328,7 +329,12 @@ namespace TaskManager.BlazorUI.Services.Base
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<int>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 400)
@@ -548,15 +554,15 @@ namespace TaskManager.BlazorUI.Services.Base
 
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task WorkTaskPriorityTypesDELETEAsync(string id, DeleteWorkTaskPriorityTypeCommand body)
+        public virtual System.Threading.Tasks.Task WorkTaskPriorityTypesDELETEAsync(int id)
         {
-            return WorkTaskPriorityTypesDELETEAsync(id, body, System.Threading.CancellationToken.None);
+            return WorkTaskPriorityTypesDELETEAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task WorkTaskPriorityTypesDELETEAsync(string id, DeleteWorkTaskPriorityTypeCommand body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task WorkTaskPriorityTypesDELETEAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -567,10 +573,6 @@ namespace TaskManager.BlazorUI.Services.Base
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var json_ = System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(body, JsonSerializerSettings);
-                    var content_ = new System.Net.Http.ByteArrayContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("DELETE");
 
                     var urlBuilder_ = new System.Text.StringBuilder();
@@ -720,7 +722,7 @@ namespace TaskManager.BlazorUI.Services.Base
 
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task WorkTasksPOSTAsync(CreateWorkTaskCommand body)
+        public virtual System.Threading.Tasks.Task<int> WorkTasksPOSTAsync(CreateWorkTaskCommand body)
         {
             return WorkTasksPOSTAsync(body, System.Threading.CancellationToken.None);
         }
@@ -728,7 +730,7 @@ namespace TaskManager.BlazorUI.Services.Base
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task WorkTasksPOSTAsync(CreateWorkTaskCommand body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> WorkTasksPOSTAsync(CreateWorkTaskCommand body, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -741,6 +743,7 @@ namespace TaskManager.BlazorUI.Services.Base
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                 
@@ -772,7 +775,12 @@ namespace TaskManager.BlazorUI.Services.Base
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<int>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 400)
@@ -992,15 +1000,15 @@ namespace TaskManager.BlazorUI.Services.Base
 
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task WorkTasksDELETEAsync(string id, DeleteWorkTaskCommand body)
+        public virtual System.Threading.Tasks.Task WorkTasksDELETEAsync(int id)
         {
-            return WorkTasksDELETEAsync(id, body, System.Threading.CancellationToken.None);
+            return WorkTasksDELETEAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task WorkTasksDELETEAsync(string id, DeleteWorkTaskCommand body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task WorkTasksDELETEAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -1011,10 +1019,6 @@ namespace TaskManager.BlazorUI.Services.Base
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var json_ = System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(body, JsonSerializerSettings);
-                    var content_ = new System.Net.Http.ByteArrayContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("DELETE");
 
                     var urlBuilder_ = new System.Text.StringBuilder();
@@ -1164,7 +1168,7 @@ namespace TaskManager.BlazorUI.Services.Base
 
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task WorkTaskStatusTypesPOSTAsync(CreateWorkTaskStatusTypeCommand body)
+        public virtual System.Threading.Tasks.Task<int> WorkTaskStatusTypesPOSTAsync(CreateWorkTaskStatusTypeCommand body)
         {
             return WorkTaskStatusTypesPOSTAsync(body, System.Threading.CancellationToken.None);
         }
@@ -1172,7 +1176,7 @@ namespace TaskManager.BlazorUI.Services.Base
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task WorkTaskStatusTypesPOSTAsync(CreateWorkTaskStatusTypeCommand body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<int> WorkTaskStatusTypesPOSTAsync(CreateWorkTaskStatusTypeCommand body, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -1185,6 +1189,7 @@ namespace TaskManager.BlazorUI.Services.Base
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     var urlBuilder_ = new System.Text.StringBuilder();
                 
@@ -1216,7 +1221,12 @@ namespace TaskManager.BlazorUI.Services.Base
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 201)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<int>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 400)
@@ -1436,15 +1446,15 @@ namespace TaskManager.BlazorUI.Services.Base
 
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task WorkTaskStatusTypesDELETEAsync(string id, DeleteWorkTaskStatusTypeCommand body)
+        public virtual System.Threading.Tasks.Task WorkTaskStatusTypesDELETEAsync(int id)
         {
-            return WorkTaskStatusTypesDELETEAsync(id, body, System.Threading.CancellationToken.None);
+            return WorkTaskStatusTypesDELETEAsync(id, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>No Content</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task WorkTaskStatusTypesDELETEAsync(string id, DeleteWorkTaskStatusTypeCommand body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task WorkTaskStatusTypesDELETEAsync(int id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -1455,10 +1465,6 @@ namespace TaskManager.BlazorUI.Services.Base
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var json_ = System.Text.Json.JsonSerializer.SerializeToUtf8Bytes(body, JsonSerializerSettings);
-                    var content_ = new System.Net.Http.ByteArrayContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("DELETE");
 
                     var urlBuilder_ = new System.Text.StringBuilder();
@@ -1682,33 +1688,6 @@ namespace TaskManager.BlazorUI.Services.Base
 
         [System.Text.Json.Serialization.JsonPropertyName("name")]
         public string Name { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.3.0.0 (NJsonSchema v11.2.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class DeleteWorkTaskCommand
-    {
-
-        [System.Text.Json.Serialization.JsonPropertyName("id")]
-        public int Id { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.3.0.0 (NJsonSchema v11.2.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class DeleteWorkTaskPriorityTypeCommand
-    {
-
-        [System.Text.Json.Serialization.JsonPropertyName("id")]
-        public int Id { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.3.0.0 (NJsonSchema v11.2.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class DeleteWorkTaskStatusTypeCommand
-    {
-
-        [System.Text.Json.Serialization.JsonPropertyName("id")]
-        public int Id { get; set; }
 
     }
 

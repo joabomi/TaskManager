@@ -41,10 +41,10 @@ public class WorkTaskPriorityTypesController : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> Post(CreateWorkTaskPriorityTypeCommand priorityType)
+    public async Task<ActionResult<int>> Post(CreateWorkTaskPriorityTypeCommand priorityType)
     {
         var response = await _mediator.Send(priorityType);
-        return CreatedAtAction(nameof(Get), new { id = response });
+        return Ok(response);
     }
 
     // PUT api/<WorkTaskPriorityTypesController>/5
@@ -64,9 +64,10 @@ public class WorkTaskPriorityTypesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesDefaultResponseType]
-    public async Task<ActionResult> Delete(DeleteWorkTaskPriorityTypeCommand priorityType)
+    public async Task<ActionResult> Delete(int id)
     {
-        await _mediator.Send(priorityType);
+        var command = new DeleteWorkTaskPriorityTypeCommand { Id = id };
+        await _mediator.Send(command);
         return NoContent();
     }
 }

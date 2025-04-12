@@ -14,20 +14,22 @@ namespace TaskManager.BlazorUI.Services
             _mapper = mapper;
         }
 
-        public async Task<Response<Guid>> CreateWorkTaskStatusType(WorkTaskStatusTypeVM workTaskStatusType)
+
+        public async Task<Response<int>> CreateWorkTaskStatusType(WorkTaskStatusTypeVM workTaskStatusType)
         {
             try
             {
                 var createWorkTaskStatusTypeCommand = _mapper.Map<CreateWorkTaskStatusTypeCommand>(workTaskStatusType);
-                await _client.WorkTaskStatusTypesPOSTAsync(createWorkTaskStatusTypeCommand);
-                return new Response<Guid>()
+                var response = await _client.WorkTaskStatusTypesPOSTAsync(createWorkTaskStatusTypeCommand);
+                return new Response<int>()
                 {
+                    Data = response,
                     Success = true,
                 };
             }
             catch (ApiException ex)
             {
-                return ConverApiExceptions<Guid>(ex);
+                return ConverApiExceptions<int>(ex);
             }
         }
 
@@ -35,7 +37,7 @@ namespace TaskManager.BlazorUI.Services
         {
             try
             {
-                await _client.WorkTaskStatusTypesDELETEAsync(id.ToString());
+                await _client.WorkTaskStatusTypesDELETEAsync(id);
                 return new Response<Guid>()
                 {
                     Success = true,
@@ -46,16 +48,16 @@ namespace TaskManager.BlazorUI.Services
                 return ConverApiExceptions<Guid>(ex);
             }
         }
-        }
 
-        public Task<WorkTaskStatusTypeVM> GetWorkTaskStatusTypeDetails(int id)
+        public async Task<WorkTaskStatusTypeVM> GetWorkTaskStatusTypeDetails(int id)
         {
-            throw new NotImplementedException();
+            var workTaskStatusTypeDetails = await _client.WorkTaskStatusTypesGETAsync(id);
+            return _mapper.Map<WorkTaskStatusTypeVM>(workTaskStatusTypeDetails);
         }
 
         public async Task<List<WorkTaskStatusTypeVM>> GetWorkTaskStatusTypes()
         {
-            var workTaskStatusTypes = await _client.WorkTasksAllAsync();
+            var workTaskStatusTypes = await _client.WorkTaskStatusTypesAllAsync();
             return _mapper.Map<List<WorkTaskStatusTypeVM>>(workTaskStatusTypes);
         }
 

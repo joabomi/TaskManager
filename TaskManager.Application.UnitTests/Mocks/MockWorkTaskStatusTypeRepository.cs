@@ -8,6 +8,7 @@ using Moq;
 using Shouldly;
 using TaskManager.Application.Contracts.Persistence;
 using TaskManager.Application.Features.WorkTask.Commands.CreateWorkTask;
+using TaskManager.Application.Features.WorkTaskStatusType.Commands.DeleteWorkTaskStatusType;
 using TaskManager.Domain;
 
 namespace TaskManager.Application.UnitTests.Mocks;
@@ -80,9 +81,9 @@ public class MockWorkTaskStatusTypeRepository
             });
 
         mockRepo.Setup(r => r.DeleteAsync(It.IsAny<WorkTaskStatusType>()))
-            .Returns((WorkTaskStatusType workTaskStatusType) =>
+            .Returns((WorkTaskStatusType id) =>
             {
-                workTaskStatusTypes.RemoveAll(w => w.Id == workTaskStatusType.Id);
+                workTaskStatusTypes.RemoveAll(w => w.Id == id.Id);
                 return Task.CompletedTask;
             });
 

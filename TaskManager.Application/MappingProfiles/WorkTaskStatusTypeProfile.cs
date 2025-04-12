@@ -22,6 +22,5 @@ public class WorkTaskStatusTypeProfile : Profile
         CreateMap<WorkTaskStatusType, WorkTaskStatusTypeDetailsDto>();
         CreateMap<CreateWorkTaskStatusTypeCommand, WorkTaskStatusType>();
         CreateMap<UpdateWorkTaskStatusTypeCommand, WorkTaskStatusType>();
-        CreateMap<DeleteWorkTaskStatusTypeCommand, WorkTaskStatusType>();
     }
 }

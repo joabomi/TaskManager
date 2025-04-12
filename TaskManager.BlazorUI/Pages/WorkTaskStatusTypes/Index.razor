@@ -1,0 +1,46 @@
+﻿@page "/statustypes"
+
+<h3>WorkTask Status Types</h3>
+
+<div class="m-2 d-flex justify-content-end">
+	<button @onclick="CreateWorkTaskStatusType" class="btn btn-success"> Add Status Type</button>
+</div>
+
+@if(!string.IsNullOrEmpty(Message))
+{
+	<div class="alert alert-danger">
+		@Message
+	</div>	
+}
+
+
+@if (WorkTaskStatusTypes == null)
+{
+	<p>Loading Data...</p>
+}
+else
+{
+	<table class="table">
+		<thead>
+			<tr>
+				<th> Id </th>
+				<th> Name </th>
+				<th> Actions </th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var statusType in WorkTaskStatusTypes)
+			{
+				<tr>
+					<td> @statusType.Id </td>
+					<td> @statusType.Name </td>
+					<td>
+						<button onclick="@(() => EditStatusType(statusType.Id))" class="btn btn-warning"> Edit </button>
+						<button onclick="@(() => DetailsStatusType(statusType.Id))" class="btn btn-info"> Edit </button>
+						<button onclick="@(() => DeleteStatusType(statusType.Id))" class="btn btn-danger"> Edit </button>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}

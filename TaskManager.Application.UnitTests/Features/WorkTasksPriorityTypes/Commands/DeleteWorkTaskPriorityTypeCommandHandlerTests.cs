@@ -31,7 +31,7 @@ public class DeleteWorkTaskPriorityTypeCommandHandlerTests
     [Fact]
     public async Task DeleteWorkTaskPriorityTypeCommand()
     {
-        var handler = new DeleteWorkTaskPriorityTypeCommandHandler(_mapper, _mockRepo.Object, _mockAppLogger.Object);
+        var handler = new DeleteWorkTaskPriorityTypeCommandHandler(_mockRepo.Object, _mockAppLogger.Object);
 
         var inintialItemsCount = _mockRepo.Object.GetAsync().Result.Count;
         var result = await handler.Handle(new DeleteWorkTaskPriorityTypeCommand { Id = 3 }, CancellationToken.None);
@@ -45,7 +45,7 @@ public class DeleteWorkTaskPriorityTypeCommandHandlerTests
     [Fact]
     public async Task DeleteWorkTaskPriorityTypeCommand_TargetNotExists()
     {
-        var handler = new DeleteWorkTaskPriorityTypeCommandHandler(_mapper, _mockRepo.Object, _mockAppLogger.Object);
+        var handler = new DeleteWorkTaskPriorityTypeCommandHandler(_mockRepo.Object, _mockAppLogger.Object);
 
         await Should.ThrowAsync<NotFoundException>(async () => await handler.Handle(new DeleteWorkTaskPriorityTypeCommand { Id = 99 }, CancellationToken.None));
     }
@@ -53,7 +53,7 @@ public class DeleteWorkTaskPriorityTypeCommandHandlerTests
     [Fact]
     public async Task DeleteWorkTaskPriorityTypeCommand_NoIndex()
     {
-        var handler = new DeleteWorkTaskPriorityTypeCommandHandler(_mapper, _mockRepo.Object, _mockAppLogger.Object);
+        var handler = new DeleteWorkTaskPriorityTypeCommandHandler(_mockRepo.Object, _mockAppLogger.Object);
 
         await Should.ThrowAsync<BadRequestException>(async () => await handler.Handle(new DeleteWorkTaskPriorityTypeCommand(), CancellationToken.None));
     }
