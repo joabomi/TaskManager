@@ -41,7 +41,7 @@ public class AuthService : IAuthService
 
         var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
 
-        if (result.Succeeded)
+        if (!result.Succeeded)
         {
             throw new BadRequestException($"Credentials for '{request.Email}' aren't valid.");
         }
