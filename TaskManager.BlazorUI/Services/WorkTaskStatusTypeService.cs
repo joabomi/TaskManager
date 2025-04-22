@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Blazored.LocalStorage;
 using TaskManager.BlazorUI.Contracts;
 using TaskManager.BlazorUI.Models.WorkTaskStatusTypes;
 using TaskManager.BlazorUI.Services.Base;
@@ -9,8 +10,8 @@ namespace TaskManager.BlazorUI.Services
     {
         private readonly IMapper _mapper;
 
-        public WorkTaskStatusTypeService(IClient client, IMapper mapper) : base(client)
-        {
+        public WorkTaskStatusTypeService(IClient client, ILocalStorageService localStorage, IMapper mapper) : base(client, localStorage)
+		{
             _mapper = mapper;
         }
 

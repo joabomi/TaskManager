@@ -15,23 +15,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{18A3DFCE-8546-4CCE-9DDD-6389D5E41710}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Domain", "TaskManager.Domain\TaskManager.Domain.csproj", "{369C4484-746E-4A74-8EF4-6F07B7A34E5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Domain", "TaskManager.Domain\TaskManager.Domain.csproj", "{369C4484-746E-4A74-8EF4-6F07B7A34E5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Application", "TaskManager.Application\TaskManager.Application.csproj", "{D8E6455C-8FEC-4DF8-9929-0F386E8FB0DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Application", "TaskManager.Application\TaskManager.Application.csproj", "{D8E6455C-8FEC-4DF8-9929-0F386E8FB0DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Persistance", "TaskManager.Persistance\TaskManager.Persistance.csproj", "{00C342A5-05A5-4959-A235-411AF02D401E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Persistance", "TaskManager.Persistance\TaskManager.Persistance.csproj", "{00C342A5-05A5-4959-A235-411AF02D401E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Infrastructure", "TaskManager.Infrastructure\TaskManager.Infrastructure.csproj", "{6A24A8A4-8D6D-455D-B301-0A61B3515D38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Infrastructure", "TaskManager.Infrastructure\TaskManager.Infrastructure.csproj", "{6A24A8A4-8D6D-455D-B301-0A61B3515D38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Api", "TaskManager.Api\TaskManager.Api.csproj", "{B35A8135-2437-42C2-BF6B-BC1C3DBFF730}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Api", "TaskManager.Api\TaskManager.Api.csproj", "{B35A8135-2437-42C2-BF6B-BC1C3DBFF730}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Application.UnitTests", "TaskManager.Application.UnitTests\TaskManager.Application.UnitTests.csproj", "{C13C1911-0E52-48A6-9609-1AC1BC9B7665}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Application.UnitTests", "TaskManager.Application.UnitTests\TaskManager.Application.UnitTests.csproj", "{C13C1911-0E52-48A6-9609-1AC1BC9B7665}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Persistance.IntegrationTests", "TaskManager.Persistance.IntegrationTests\TaskManager.Persistance.IntegrationTests.csproj", "{C899DD80-5D47-4974-848C-FC0410E65BEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Persistance.IntegrationTests", "TaskManager.Persistance.IntegrationTests\TaskManager.Persistance.IntegrationTests.csproj", "{C899DD80-5D47-4974-848C-FC0410E65BEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.BlazorUI", "TaskManager.BlazorUI\TaskManager.BlazorUI.csproj", "{C349DC8F-2214-4D2A-8077-BA70714EAD25}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.BlazorUI", "TaskManager.BlazorUI\TaskManager.BlazorUI.csproj", "{C349DC8F-2214-4D2A-8077-BA70714EAD25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Identity", "TaskManager.Identity\TaskManager.Identity.csproj", "{5FBF40B2-C2FE-4609-B1A8-30C0172491E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskManager.Identity", "TaskManager.Identity\TaskManager.Identity.csproj", "{5FBF40B2-C2FE-4609-B1A8-30C0172491E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
