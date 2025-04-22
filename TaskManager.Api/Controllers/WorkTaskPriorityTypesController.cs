@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TaskManager.Application.Features.WorkTaskPriorityType.Commands.CreateWorkTaskPriorityType;
 using TaskManager.Application.Features.WorkTaskPriorityType.Commands.DeleteWorkTaskPriorityType;
@@ -12,6 +13,7 @@ namespace TaskManager.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class WorkTaskPriorityTypesController : ControllerBase
 {
     private readonly IMediator _mediator;

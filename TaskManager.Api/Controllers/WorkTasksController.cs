@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TaskManager.Application.Features.WorkTask.Commands.CreateWorkTask;
 using TaskManager.Application.Features.WorkTask.Commands.DeleteWorkTask;
@@ -13,6 +14,7 @@ namespace TaskManager.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class WorkTasksController : ControllerBase
 {
     private readonly IMediator _mediator;

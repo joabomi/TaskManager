@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TaskManager.Application.Features.WorkTaskStatusType.Commands.CreateWorkTaskStatusType;
 using TaskManager.Application.Features.WorkTaskStatusType.Commands.DeleteWorkTaskStatusType;
@@ -13,6 +14,7 @@ namespace TaskManager.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class WorkTaskStatusTypesController : ControllerBase
 {
     private readonly IMediator _mediator;
