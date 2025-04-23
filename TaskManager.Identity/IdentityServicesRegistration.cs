@@ -48,10 +48,6 @@ public static class IdentityServicesRegistration
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:Key"]))
             };
         });
-        Console.WriteLine($"Issuer: {configuration["JwtSettings:Issuer"]}");
-        Console.WriteLine($"Audience: {configuration["JwtSettings:Audience"]}");
-        Console.WriteLine($"Key: {configuration["JwtSettings:Key"]}");
-        Console.WriteLine($"DurationInMinutes: {configuration["JwtSettings:DurationInMinutes"]}");
 
         return services;
     }
