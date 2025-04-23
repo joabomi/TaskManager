@@ -24,8 +24,6 @@ namespace TaskManager.BlazorUI.Services
                 if (authenticationResponse.Token != string.Empty)
                 {
                     await _localStorage.SetItemAsync("token", authenticationResponse.Token);
-
-                    //Set claims in Blazor and login state
                     await ((ApiAuthenticationStateProvider)_authenticationStateProvider).LoggedIn();
                     return true;
                 }
