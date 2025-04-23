@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using TaskManager.BlazorUI.Models.WorkTaskPriorityTypes;
+using TaskManager.BlazorUI.Models.WorkTasks;
 using TaskManager.BlazorUI.Models.WorkTaskStatusTypes;
 using TaskManager.BlazorUI.Services.Base;
 

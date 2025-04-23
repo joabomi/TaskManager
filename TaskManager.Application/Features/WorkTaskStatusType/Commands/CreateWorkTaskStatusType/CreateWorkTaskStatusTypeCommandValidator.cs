@@ -25,8 +25,8 @@ public class CreateWorkTaskStatusTypeCommandValidator : AbstractValidator<Create
         _workTaskStatusRepository = workTaskStatusRepository;
     }
 
-    private Task<bool> WorkStatusTypeNameUnique(CreateWorkTaskStatusTypeCommand command, CancellationToken token)
+    private async Task<bool> WorkStatusTypeNameUnique(CreateWorkTaskStatusTypeCommand command, CancellationToken token)
     {
-        return _workTaskStatusRepository.IsWorkStatusTypeUnique(command.Name);
+        return await _workTaskStatusRepository.IsWorkStatusTypeUnique(command.Name);
     }
 }

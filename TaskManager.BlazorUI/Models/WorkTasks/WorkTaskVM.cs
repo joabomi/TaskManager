@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TaskManager.BlazorUI.Models.WorkTaskStatusTypes;
+namespace TaskManager.BlazorUI.Models.WorkTasks;
 
 public class WorkTaskVM
 {

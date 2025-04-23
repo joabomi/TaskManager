@@ -34,7 +34,7 @@ public partial class Edit
         var result = await WorkTaskStatusTypeService.UpdateWorkTaskStatusType(id, Model);
         if (result.Success)
         {
-            NavigationManager.NavigateTo("/statustypes");
+            GoBack();
         }
         else
         {

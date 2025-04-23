@@ -31,12 +31,17 @@ namespace TaskManager.BlazorUI.Pages.WorkTaskStatusTypes
             var result = await WorkTaskStatusTypeService.CreateWorkTaskStatusType(Model);
             if (result.Success)
             {
-                NavigationManager.NavigateTo("/statustypes");
+                GoBack();
             }
             else
             {
                 Message = "Failed to create Status Type.";
             }
+        }
+
+        public void GoBack()
+        {
+            NavigationManager.NavigateTo("/statustypes");
         }
     }
 }

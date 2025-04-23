@@ -46,7 +46,7 @@ public class WorkTaskPriorityTypesController : ControllerBase
     public async Task<ActionResult<int>> Post(CreateWorkTaskPriorityTypeCommand priorityType)
     {
         var response = await _mediator.Send(priorityType);
-        return Ok(response);
+        return CreatedAtAction(nameof(Get), new { id = response }, response);
     }
 
     // PUT api/<WorkTaskPriorityTypesController>/5

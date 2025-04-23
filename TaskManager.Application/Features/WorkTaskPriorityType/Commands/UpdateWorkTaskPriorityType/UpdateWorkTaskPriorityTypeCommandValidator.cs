@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentValidation;
 using TaskManager.Application.Contracts.Persistence;
+using TaskManager.Domain;
 
 namespace TaskManager.Application.Features.WorkTaskPriorityType.Commands.UpdateWorkTaskPriorityType;
 
@@ -26,7 +27,7 @@ public class UpdateWorkTaskPriorityTypeCommandValidator : AbstractValidator<Upda
             .MaximumLength(100).WithMessage("{PropertyName} must be fewer than 100 characteres");
 
         RuleFor(p => p)
-            .MustAsync(WorkStatusTypeNameUnique).WithMessage("Work Status Type already exists");
+            .MustAsync(WorkTaskPriorityTypeUpdateValid).WithMessage("Work Priority Type already exists");
 
         RuleFor(p => p.PriorityWeight)
             .NotEmpty().WithMessage("{PropertyName} is required")
@@ -41,8 +42,8 @@ public class UpdateWorkTaskPriorityTypeCommandValidator : AbstractValidator<Upda
         return workTaskPriorityType != null;
     }
 
-    private async Task<bool> WorkStatusTypeNameUnique(UpdateWorkTaskPriorityTypeCommand command, CancellationToken token)
+    private async Task<bool> WorkTaskPriorityTypeUpdateValid(UpdateWorkTaskPriorityTypeCommand command, CancellationToken token)
     {
-        return await _workTaskPriorityTypeRepository.IsWorkPriorityTypeUnique(command.Name, command.PriorityWeight);
+        return await _workTaskPriorityTypeRepository.IsWorkPriorityTypeUpdateValid(command.Name, command.PriorityWeight, command.Id);
     }
 }
