@@ -2,7 +2,7 @@
 
 <h3>WorkTask Status Types</h3>
 
-<div class="m-2 d-flex justify-content-end">
+<div class="m-2 d-flex justify-content-lg-start">
 	<button @onclick="CreateWorkTaskStatusType" class="btn btn-success"> Add Status Type</button>
 </div>
 
@@ -36,7 +36,7 @@ else
 					<td> @statusType.Name </td>
 					<td>
 						<button onclick="@(() => EditStatusType(statusType.Id))" class="btn btn-warning"> Edit </button>
-						<button onclick="@(() => DetailsStatusType(statusType.Id))" class="btn btn-info"> Get Details </button>
+						<button onclick="@(() => DetailsStatusType(statusType.Id))" class="btn btn-info"> Details </button>
 						<button onclick="@(() => DeleteStatusType(statusType.Id))" class="btn btn-danger"> Delete </button>
 					</td>
 				</tr>
