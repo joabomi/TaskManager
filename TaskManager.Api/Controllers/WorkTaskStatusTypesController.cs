@@ -46,8 +46,9 @@ public class WorkTaskStatusTypesController : ControllerBase
     [ProducesResponseType(400)]
     public async Task<ActionResult<int>> Post(CreateWorkTaskStatusTypeCommand statusType)
     {
-        var response = await _mediator.Send(statusType);
-        return Ok(response);
+        var response = await _mediator.Send(statusType); 
+        return CreatedAtAction(nameof(Get), new { id = response }, response);
+
     }
 
     // PUT api/<WorkTaskStatusTypesController>/5

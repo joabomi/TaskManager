@@ -30,8 +30,9 @@ public partial class Index
     protected async Task DeleteStatusType(int id)
     {
         var response = await WorkTaskStatusTypeService.DeleteWorkTaskStatusType(id);
-        if(response.Success)
+        if (response.Success)
         {
+            WorkTaskStatusTypes.RemoveAll(WorkTaskStatusTypes => WorkTaskStatusTypes.Id == id);
             StateHasChanged();
         }
         else
