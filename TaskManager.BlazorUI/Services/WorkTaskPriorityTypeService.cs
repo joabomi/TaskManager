@@ -20,7 +20,6 @@ namespace TaskManager.BlazorUI.Services
         {
             try
             {
-                await AddBearerToken();
                 var createWorkTaskPriorityTypeCommand = _mapper.Map<CreateWorkTaskPriorityTypeCommand>(workTaskPriorityType);
                 var response = await _client.WorkTaskPriorityTypesPOSTAsync(createWorkTaskPriorityTypeCommand);
                 return new Response<int>()
@@ -39,7 +38,6 @@ namespace TaskManager.BlazorUI.Services
         {
             try
             {
-                await AddBearerToken();
                 await _client.WorkTaskPriorityTypesDELETEAsync(id);
                 return new Response<Guid>()
                 {
@@ -54,14 +52,12 @@ namespace TaskManager.BlazorUI.Services
 
         public async Task<WorkTaskPriorityTypeVM> GetWorkTaskPriorityTypeDetails(int id)
         {
-            await AddBearerToken();
             var workTaskPriorityTypeDetails = await _client.WorkTaskPriorityTypesGETAsync(id);
             return _mapper.Map<WorkTaskPriorityTypeVM>(workTaskPriorityTypeDetails);
         }
 
         public async Task<List<WorkTaskPriorityTypeVM>> GetWorkTaskPriorityTypes()
         {
-            await AddBearerToken();
             var workTaskPriorityTypes = await _client.WorkTaskPriorityTypesAllAsync();
             return _mapper.Map<List<WorkTaskPriorityTypeVM>>(workTaskPriorityTypes);
         }
@@ -70,7 +66,6 @@ namespace TaskManager.BlazorUI.Services
         {
             try
             {
-                await AddBearerToken();
                 var updateWorkTaskPriorityTypeCommand = _mapper.Map<UpdateWorkTaskPriorityTypeCommand>(workTaskPriorityType);
                 await _client.WorkTaskPriorityTypesPUTAsync(id.ToString(), updateWorkTaskPriorityTypeCommand);
                 return new Response<Guid>()

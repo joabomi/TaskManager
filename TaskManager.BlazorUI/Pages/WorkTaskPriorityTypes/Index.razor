@@ -1,47 +1,59 @@
 ﻿@page "/prioritytypes"
-<h3>WorkTask Priority Types</h3>
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
-<div class="m-2 d-flex justify-content-lg-start">
-	<button @onclick="CreateWorkTaskPriorityType" class="btn btn-success"> Add Priority Type</button>
-</div>
+<AuthorizeView>
+	<Authorized>
+		<h3>WorkTask Priority Types</h3>
 
-@if (!string.IsNullOrEmpty(Message))
-{
-	<div class="alert alert-danger">
-		@Message
-	</div>
-}
+		<div class="m-2 d-flex justify-content-lg-start">
+			<button @onclick="CreateWorkTaskPriorityType" class="btn btn-success"> Add Priority Type</button>
+		</div>
+
+		@if (!string.IsNullOrEmpty(Message))
+		{
+			<div class="alert alert-danger">
+				@Message
+			</div>
+		}
 
 
-@if (WorkTaskPriorityTypes == null)
-{
-	<p>Loading Data...</p>
-}
-else
-{
-	<table class="table">
-		<thead>
-			<tr>
-				<th> Id </th>
-				<th> Name </th>
-				<th> Actions </th>
-			</tr>
-		</thead>
-		<tbody>
-			@foreach (var PriorityType in WorkTaskPriorityTypes)
-			{
-				<tr>
-					<td> @PriorityType.Id </td>
-					<td> @PriorityType.Name </td>
-					<td>
-						<button onclick="@(() => EditPriorityType(PriorityType.Id))" class="btn btn-warning"> Edit </button>
-						<button onclick="@(() => DetailsPriorityType(PriorityType.Id))" class="btn btn-info"> Details </button>
-						<button onclick="@(() => DeletePriorityType(PriorityType.Id))" class="btn btn-danger"> Delete </button>
-					</td>
-				</tr>
-			}
-		</tbody>
-	</table>
-}
+		@if (WorkTaskPriorityTypes == null)
+		{
+			<p>Loading Data...</p>
+		}
+		else
+		{
+			<table class="table">
+				<thead>
+					<tr>
+						<th> Id </th>
+						<th> Name </th>
+						<th> Actions </th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var PriorityType in WorkTaskPriorityTypes)
+					{
+						<tr>
+							<td> @PriorityType.Id </td>
+							<td> @PriorityType.Name </td>
+							<td>
+								<button onclick="@(() => EditPriorityType(PriorityType.Id))" class="btn btn-warning"> Edit </button>
+								<button onclick="@(() => DetailsPriorityType(PriorityType.Id))" class="btn btn-info"> Details </button>
+								<button onclick="@(() => DeletePriorityType(PriorityType.Id))" class="btn btn-danger" disabled="@(!_canDelete)"> Delete	</button>
+
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		}
+	</Authorized>
+	<NotAuthorized>
+		<div class="alert alert-danger">
+			<p>You are not authorized to view this page.</p>
+		</div>
+	</NotAuthorized>
+</AuthorizeView>
 
 

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using TaskManager.BlazorUI.Contracts;
 using TaskManager.BlazorUI.Models.WorkTaskStatusTypes;
 
@@ -13,6 +14,8 @@ public partial class Index
     public IWorkTaskStatusTypeService WorkTaskStatusTypeService { get; set; }
     public List<WorkTaskStatusTypeVM> WorkTaskStatusTypes { get; private set; }
     public string Message { get; set; } = string.Empty;
+    private bool _canDelete { get; set; } = false;
+
     protected void CreateWorkTaskStatusType()
     {
         NavigationManager.NavigateTo("/statustypes/create");
@@ -44,5 +47,13 @@ public partial class Index
     protected override async Task OnInitializedAsync()
     {
         WorkTaskStatusTypes = await WorkTaskStatusTypeService.GetWorkTaskStatusTypes();
+
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        if (user.Identity.IsAuthenticated)
+        {
+            _canDelete = user.IsInRole("Administrator");
+        }
+
     }
 }

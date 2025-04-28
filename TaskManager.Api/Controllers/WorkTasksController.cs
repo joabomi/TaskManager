@@ -6,7 +6,6 @@ using TaskManager.Application.Features.WorkTask.Commands.DeleteWorkTask;
 using TaskManager.Application.Features.WorkTask.Commands.UpdateWorkTask;
 using TaskManager.Application.Features.WorkTask.Queries.GetAllWorkTasks;
 using TaskManager.Application.Features.WorkTask.Queries.GetWorkTaskDetails;
-using TaskManager.Domain;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,7 +13,6 @@ namespace TaskManager.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
 public class WorkTasksController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -65,6 +63,7 @@ public class WorkTasksController : ControllerBase
 
     // DELETE api/<WorkTasksController>/5
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Administrator")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesDefaultResponseType]
