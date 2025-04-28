@@ -12,7 +12,7 @@ public class BaseHttpService
         _localStorage = localStorage;
     }
 
-    protected Response<Guid> ConverApiExceptions<Guid>(ApiException ex)
+    protected Response<Guid> ConvertApiExceptions<Guid>(ApiException ex)
     {
         if (ex.StatusCode == 400)
         {

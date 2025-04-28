@@ -1,0 +1,59 @@
+﻿@page "/worktasks"
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<AuthorizeView>
+	<Authorized>
+		<h3>Work Tasks</h3>
+
+		<div class="m-2 d-flex justify-content-lg-start">
+			<button @onclick="CreateWorkTask" class="btn btn-success"> Add New Work Task</button>
+		</div>
+
+		@if (!string.IsNullOrEmpty(Message))
+		{
+			<div class="alert alert-danger">
+				@Message
+			</div>
+		}
+
+
+		@if (WorkTasks == null)
+		{
+			<p>Loading Data...</p>
+		}
+		else
+		{
+			<table class="table">
+				<thead>
+					<tr>
+						<th> Id </th>
+						<th> Name </th>
+						<th> Actions </th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var PriorityType in WorkTasks)
+					{
+						<tr>
+							<td> @PriorityType.Id </td>
+							<td> @PriorityType.Name </td>
+							<td>
+								<button onclick="@(() => EditWorkTask(PriorityType.Id))" class="btn btn-warning"> Edit </button>
+								<button onclick="@(() => DetailsWorkTask(PriorityType.Id))" class="btn btn-info"> Details </button>
+								<button onclick="@(() => DeleteWorkTask(PriorityType.Id))" class="btn btn-danger" disabled="@(!_canDelete)"> Delete	</button>
+
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		}
+	</Authorized>
+	<NotAuthorized>
+		<div class="alert alert-danger">
+			<p>You are not authorized to view this page.</p>
+		</div>
+	</NotAuthorized>
+</AuthorizeView>
+
+

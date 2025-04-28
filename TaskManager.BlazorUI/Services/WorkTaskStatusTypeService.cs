@@ -30,7 +30,7 @@ namespace TaskManager.BlazorUI.Services
             }
             catch (ApiException ex)
             {
-                return ConverApiExceptions<int>(ex);
+                return ConvertApiExceptions<int>(ex);
             }
         }
 
@@ -46,7 +46,7 @@ namespace TaskManager.BlazorUI.Services
             }
             catch (ApiException ex)
             {
-                return ConverApiExceptions<Guid>(ex);
+                return ConvertApiExceptions<Guid>(ex);
             }
         }
 
@@ -75,7 +75,7 @@ namespace TaskManager.BlazorUI.Services
             }
             catch (ApiException ex)
             {
-                return ConverApiExceptions<Guid>(ex);
+                return ConvertApiExceptions<Guid>(ex);
             }
         }
     }
