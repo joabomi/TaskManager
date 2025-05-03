@@ -6,7 +6,7 @@ using TaskManager.Application.Contracts.Persistence;
 using TaskManager.Application.Exceptions;
 using TaskManager.Application.Features.WorkTask.Queries.GetWorkTaskDetails;
 using TaskManager.Application.Features.WorkTaskStatusType.Queries.GetWorkTaskStatusTypeDetails;
-using TaskManager.Application.MappingProfilesh;
+using TaskManager.Application.MappingProfiles;
 using TaskManager.Application.UnitTests.Mocks;
 
 namespace TaskManager.Application.UnitTests.Features.WorkTasksStatusTypes.Queries;

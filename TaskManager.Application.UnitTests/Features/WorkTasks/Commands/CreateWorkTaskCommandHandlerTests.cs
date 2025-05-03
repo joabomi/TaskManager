@@ -1,15 +1,17 @@
 ﻿using AutoMapper;
 using Moq;
 using Shouldly;
+using TaskManager.Application.Contracts.Email;
+using TaskManager.Application.Contracts.Identity;
 using TaskManager.Application.Contracts.Logging;
 using TaskManager.Application.Contracts.Persistence;
 using TaskManager.Application.Exceptions;
 using TaskManager.Application.Features.WorkTask.Commands.CreateWorkTask;
-using TaskManager.Application.Features.WorkTask.Commands.UpdateWorkTask;
-using TaskManager.Application.MappingProfilesh;
+
+using TaskManager.Application.MappingProfiles;
 using TaskManager.Application.UnitTests.Mocks;
 
-namespace TaskManager.Application.UnitTests.Features.WorkTaskss.Commands;
+namespace TaskManager.Application.UnitTests.Features.WorkTasks.Commands;
 
 public class CreateWorkTaskCommandHandlerTests
 {
@@ -18,6 +20,8 @@ public class CreateWorkTaskCommandHandlerTests
     private readonly Mock<IWorkTaskPriorityTypeRepository> _workTaskPriorityTypesMockRepo;
     private readonly IMapper _mapper;
     private readonly Mock<IAppLogger<CreateWorkTaskCommandHandler>> _mockAppLogger;
+    private readonly Mock<IUserService> _userServiceMock;
+    private readonly Mock<IEmailSender> _emailSenderMock;
 
     public CreateWorkTaskCommandHandlerTests()
     {
@@ -37,7 +41,7 @@ public class CreateWorkTaskCommandHandlerTests
     [Fact]
     public async Task CreateWorkTaskCommand()
     {
-        var handler = new CreateWorkTaskCommandHandler(_mapper, _workTasksMockRepo.Object, _workTaskPriorityTypesMockRepo.Object, _workTaskStatusTypesMockRepo.Object, _mockAppLogger.Object);
+        var handler = new CreateWorkTaskCommandHandler(_mapper, _workTasksMockRepo.Object, _workTaskPriorityTypesMockRepo.Object, _workTaskStatusTypesMockRepo.Object, _userServiceMock.Object, _mockAppLogger.Object, _emailSenderMock.Object);
 
         var inintialItemsCount = _workTasksMockRepo.Object.GetAsync().Result.Count;
         CreateWorkTaskCommand newItem = new CreateWorkTaskCommand
@@ -71,7 +75,7 @@ public class CreateWorkTaskCommandHandlerTests
     [Fact]
     public async Task CreateWorkTaskCommand_BadName()
     {
-        var handler = new CreateWorkTaskCommandHandler(_mapper, _workTasksMockRepo.Object, _workTaskPriorityTypesMockRepo.Object, _workTaskStatusTypesMockRepo.Object, _mockAppLogger.Object);
+        var handler = new CreateWorkTaskCommandHandler(_mapper, _workTasksMockRepo.Object, _workTaskPriorityTypesMockRepo.Object, _workTaskStatusTypesMockRepo.Object, _userServiceMock.Object, _mockAppLogger.Object, _emailSenderMock.Object);
         var command = new CreateWorkTaskCommand
         {
             Description = "Description7",
@@ -97,7 +101,7 @@ public class CreateWorkTaskCommandHandlerTests
     [Fact]
     public async Task CreateWorkTaskCommand_BadStatus()
     {
-        var handler = new CreateWorkTaskCommandHandler(_mapper, _workTasksMockRepo.Object, _workTaskPriorityTypesMockRepo.Object, _workTaskStatusTypesMockRepo.Object, _mockAppLogger.Object);
+        var handler = new CreateWorkTaskCommandHandler(_mapper, _workTasksMockRepo.Object, _workTaskPriorityTypesMockRepo.Object, _workTaskStatusTypesMockRepo.Object, _userServiceMock.Object, _mockAppLogger.Object, _emailSenderMock.Object);
         var command = new CreateWorkTaskCommand
         {
             Name = "WorkTask7",
@@ -116,7 +120,7 @@ public class CreateWorkTaskCommandHandlerTests
     [Fact]
     public async Task CreateWorkTaskCommand_BadPriority()
     {
-        var handler = new CreateWorkTaskCommandHandler(_mapper, _workTasksMockRepo.Object, _workTaskPriorityTypesMockRepo.Object, _workTaskStatusTypesMockRepo.Object, _mockAppLogger.Object);
+        var handler = new CreateWorkTaskCommandHandler(_mapper, _workTasksMockRepo.Object, _workTaskPriorityTypesMockRepo.Object, _workTaskStatusTypesMockRepo.Object, _userServiceMock.Object, _mockAppLogger.Object, _emailSenderMock.Object);
         var command = new CreateWorkTaskCommand
         {
             Name = "WorkTask7",
@@ -135,7 +139,7 @@ public class CreateWorkTaskCommandHandlerTests
     [Fact]
     public async Task CreateWorkTaskCommand_BadStartDate()
     {
-        var handler = new CreateWorkTaskCommandHandler(_mapper, _workTasksMockRepo.Object, _workTaskPriorityTypesMockRepo.Object, _workTaskStatusTypesMockRepo.Object, _mockAppLogger.Object);
+        var handler = new CreateWorkTaskCommandHandler(_mapper, _workTasksMockRepo.Object, _workTaskPriorityTypesMockRepo.Object, _workTaskStatusTypesMockRepo.Object, _userServiceMock.Object, _mockAppLogger.Object, _emailSenderMock.Object);
         var command = new CreateWorkTaskCommand
         {
             Name = "WorkTask7",
@@ -154,7 +158,7 @@ public class CreateWorkTaskCommandHandlerTests
     [Fact]
     public async Task CreateWorkTaskCommand_BadEndDate()
     {
-        var handler = new CreateWorkTaskCommandHandler(_mapper, _workTasksMockRepo.Object, _workTaskPriorityTypesMockRepo.Object, _workTaskStatusTypesMockRepo.Object, _mockAppLogger.Object);
+        var handler = new CreateWorkTaskCommandHandler(_mapper, _workTasksMockRepo.Object, _workTaskPriorityTypesMockRepo.Object, _workTaskStatusTypesMockRepo.Object, _userServiceMock.Object, _mockAppLogger.Object, _emailSenderMock.Object);
         var command = new CreateWorkTaskCommand
         {
             Name = "WorkTask7",
@@ -173,7 +177,7 @@ public class CreateWorkTaskCommandHandlerTests
     [Fact]
     public async Task CreateWorkTaskCommand_EndBeforeStart()
     {
-        var handler = new CreateWorkTaskCommandHandler(_mapper, _workTasksMockRepo.Object, _workTaskPriorityTypesMockRepo.Object, _workTaskStatusTypesMockRepo.Object, _mockAppLogger.Object);
+        var handler = new CreateWorkTaskCommandHandler(_mapper, _workTasksMockRepo.Object, _workTaskPriorityTypesMockRepo.Object, _workTaskStatusTypesMockRepo.Object, _userServiceMock.Object, _mockAppLogger.Object, _emailSenderMock.Object);
         var command = new CreateWorkTaskCommand
         {
             Name = "WorkTask7",

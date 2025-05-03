@@ -18,7 +18,4 @@ public class WorkTask : BaseEntity
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
     public string AssignedPersonId { get; set; } = string.Empty;
-
-    //public TaskUser User { get; set; }
-    //public bool Asigned { get; set; }
 }

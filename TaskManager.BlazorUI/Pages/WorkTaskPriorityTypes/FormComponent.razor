@@ -1,0 +1,30 @@
+﻿
+<EditForm Model="@PriorityType" OnValidSubmit="OnValidSubmit">
+	<DataAnnotationsValidator />
+	<ValidationSummary />
+
+	<fieldset disabled ="@Disabled">
+		<div class="form-group">
+			<label class="control-label">Priority Type Name:</label>
+			<div>
+				<InputText id="prioritytypename" class="form-control" @bind-Value="@PriorityType.Name"></InputText>
+				<ValidationMessage For="@(() => PriorityType.Name)" />
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div>
+				<label class="control-label">Priority Type Weight:</label>
+				<InputNumber id="prioritytypeweight" class="form-control" @bind-Value="@PriorityType.PriorityWeight"></InputNumber>
+			</div>
+		</div>
+	</fieldset>
+	@if (!Disabled)
+	{
+		<button type="submit" class="btn btn-success btn-block">
+			@ButtonText
+		</button>
+	}
+</EditForm>
+
+

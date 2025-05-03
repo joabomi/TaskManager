@@ -45,7 +45,7 @@ public class WorkTasksController : ControllerBase
     public async Task<ActionResult<int>> Post(CreateWorkTaskCommand workTask)
     {
         var response = await _mediator.Send(workTask);
-        return Ok(response);
+        return CreatedAtAction(nameof(Get), new { id = response }, response);
     }
 
     // PUT api/<WorkTasksController>/5

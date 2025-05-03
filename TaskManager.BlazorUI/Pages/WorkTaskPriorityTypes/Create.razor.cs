@@ -11,41 +11,19 @@ namespace TaskManager.BlazorUI.Pages.WorkTaskPriorityTypes
         public NavigationManager NavigationManager { get; set; }
         [Inject]
         public IWorkTaskPriorityTypeService WorkTaskPriorityTypeService { get; set; }
-        public WorkTaskPriorityTypeVM Model { get; set; } = new WorkTaskPriorityTypeVM();
-        public string WeightString { get; set; } = string.Empty;
+        internal WorkTaskPriorityTypeVM priorityType { get; set; } = new WorkTaskPriorityTypeVM();
         public string Message { get; set; } = string.Empty;
 
         protected override void OnInitialized()
         {
-            Model = new WorkTaskPriorityTypeVM();
+            priorityType = new WorkTaskPriorityTypeVM();
         }
 
         [Authorize]
-        public async void CreateNewType()
+        public async Task CreateNewType()
         {
-            Message = string.Empty;
-            if (string.IsNullOrEmpty(Model.Name))
-            {
-                Message = "Priority Type Name is required.";
-                return;
-            }
-            if(string.IsNullOrEmpty(WeightString))
-            {
-                Message = "Priority Weight is required.";
-                return;
-            }
-            bool parse_result = int.TryParse(WeightString, out int parsedWeight);
-            if (!parse_result)
-            {
-                Message = "Priority Weight must be an integer number.";
-                return;
-            }
-            else
-            {
-                Model.PriorityWeight = parsedWeight;
-            }
 
-            var result = await WorkTaskPriorityTypeService.CreateWorkTaskPriorityType(Model);
+            var result = await WorkTaskPriorityTypeService.CreateWorkTaskPriorityType(priorityType);
 
             if (result.Success)
             {

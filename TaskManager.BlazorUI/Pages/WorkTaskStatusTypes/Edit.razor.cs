@@ -11,7 +11,7 @@ public partial class Edit
     public NavigationManager NavigationManager { get; set; }
     [Inject]
     public IWorkTaskStatusTypeService WorkTaskStatusTypeService { get; set; }
-    public WorkTaskStatusTypeVM Model { get; set; } = new WorkTaskStatusTypeVM();
+    internal WorkTaskStatusTypeVM statusType { get; set; } = new WorkTaskStatusTypeVM();
     public string Message { get; set; } = string.Empty;
 
     [Parameter]
@@ -19,19 +19,13 @@ public partial class Edit
 
     protected async override Task OnInitializedAsync()
     {
-        Model = await WorkTaskStatusTypeService.GetWorkTaskStatusTypeDetails(id);
+        statusType = await WorkTaskStatusTypeService.GetWorkTaskStatusTypeDetails(id);
     }
 
     [Authorize]
     public async Task EditStatusType()
     {
-        Message = string.Empty;
-        if (string.IsNullOrEmpty(Model.Name))
-        {
-            Message = "Status Type Name is required.";
-            return;
-        }
-        var result = await WorkTaskStatusTypeService.UpdateWorkTaskStatusType(id, Model);
+        var result = await WorkTaskStatusTypeService.UpdateWorkTaskStatusType(id, statusType);
         if (result.Success)
         {
             GoBack();

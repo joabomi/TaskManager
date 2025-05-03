@@ -6,7 +6,7 @@
 		<h3>WorkTask Priority Types</h3>
 
 		<div class="m-2 d-flex justify-content-lg-start">
-			<button @onclick="CreateWorkTaskPriorityType" class="btn btn-success"> Add Priority Type</button>
+			<button @onclick="CreateWorkTaskPriorityType" class="btn btn-success" disabled="@(!_isAdmin)"> Add Priority Type</button>
 		</div>
 
 		@if (!string.IsNullOrEmpty(Message))
@@ -38,9 +38,9 @@
 							<td> @PriorityType.Id </td>
 							<td> @PriorityType.Name </td>
 							<td>
-								<button onclick="@(() => EditPriorityType(PriorityType.Id))" class="btn btn-warning"> Edit </button>
+								<button onclick="@(() => EditPriorityType(PriorityType.Id))" class="btn btn-warning" disabled="@(!_isAdmin)"> Edit </button>
 								<button onclick="@(() => DetailsPriorityType(PriorityType.Id))" class="btn btn-info"> Details </button>
-								<button onclick="@(() => DeletePriorityType(PriorityType.Id))" class="btn btn-danger" disabled="@(!_canDelete)"> Delete	</button>
+								<button onclick="@(() => DeletePriorityType(PriorityType.Id))" class="btn btn-danger" disabled="@(!_isAdmin)"> Delete	</button>
 
 							</td>
 						</tr>

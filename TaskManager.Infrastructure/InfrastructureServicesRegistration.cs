@@ -15,6 +15,11 @@ namespace TaskManager.Infrastructure
         {
             services.Configure<EmailSettings>(configuration.GetSection("EmailSettings"));
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddLoggingAdapter();
+            return services;
+        }
+        public static IServiceCollection AddLoggingAdapter(this IServiceCollection services)
+        {
             services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
             return services;
         }

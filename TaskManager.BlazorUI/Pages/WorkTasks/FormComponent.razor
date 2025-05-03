@@ -1,0 +1,71 @@
+﻿
+<EditForm Model="@WorkTask" OnValidSubmit="OnValidSubmit">
+	<DataAnnotationsValidator />
+	<ValidationSummary />
+
+	<fieldset disabled="@Disabled">
+		<div class="form-group">
+			<label class="control-label">Task Name:</label>
+			<div>
+				<InputText id="taskname" class="form-control" @bind-Value="@WorkTask.Name"></InputText>
+				<ValidationMessage For="@(() => WorkTask.Name)" />
+			</div>
+			<label class="control-label">Task Description:</label>
+			<div>
+				<InputText id="description" class="form-control" @bind-Value="@WorkTask.Description"></InputText>
+				<ValidationMessage For="@(() => WorkTask.Description)" />
+			</div>
+			<label class="control-label">Task Status:</label>
+			<div>
+				<InputSelect id="status" class="form-control" @bind-Value="@WorkTask.StatusId">
+					<option value="">Select Status</option>
+					@foreach (var status in WorkTaskStatusTypes)
+					{
+						<option value="@status.Id">@status.Name</option>
+					}
+				</InputSelect>
+				<ValidationMessage For="@(() => WorkTask.Status)" />
+			</div>
+			<label class="control-label">Task Priority:</label>
+			<div>
+				<InputSelect id="priority" class="form-control" @bind-Value="@WorkTask.PriorityId">
+					<option value="">Select Priority</option>
+					@foreach (var priority in WorkTaskPriorityTypes)
+					{
+						<option value="@priority.Id">@priority.Name</option>
+					}
+				</InputSelect>
+				<ValidationMessage For="@(() => WorkTask.Priority)" />
+			</div>
+			<label class="control-label">Start Date:</label>
+			<div>
+				<InputDate id="startdate" class="form-control" @bind-Value="@WorkTask.StartDate"></InputDate>
+				<ValidationMessage For="@(() => WorkTask.StartDate)" />
+			</div>
+			<label class="control-label">End Date:</label>
+			<div>
+				<InputDate id="enddate" class="form-control" @bind-Value="@WorkTask.EndDate"></InputDate>
+				<ValidationMessage For="@(() => WorkTask.EndDate)" />
+			</div>
+			<label class="control-label">Assigned to:</label>
+			<div>
+				<InputSelect id="assignedperson" class="form-control" @bind-Value="@WorkTask.AssignedPersonId">
+					<option value="">Select User</option>
+					@foreach (var user in Users)
+					{
+						<option value="@user.Id">@user.FirstName @user.LastName</option>
+					}
+				</InputSelect>
+				<ValidationMessage For="@(() => WorkTask.Priority)" />
+			</div>
+		</div>
+	</fieldset>
+	@if (!Disabled)
+	{
+		<button type="submit" class="btn btn-success btn-block">
+			@ButtonText
+		</button>
+		<input type="button" value="Cancel" class="btn btn-outline-primary" onclick="@GoBack" />
+	}
+</EditForm>
+

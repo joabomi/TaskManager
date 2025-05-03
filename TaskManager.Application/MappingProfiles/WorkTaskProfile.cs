@@ -6,7 +6,7 @@ using TaskManager.Application.Features.WorkTask.Commands.CreateWorkTask;
 using TaskManager.Application.Features.WorkTask.Commands.UpdateWorkTask;
 using TaskManager.Application.Features.WorkTask.Commands.DeleteWorkTask;
 
-namespace TaskManager.Application.MappingProfilesh;
+namespace TaskManager.Application.MappingProfiles;
 
 public class WorkTaskProfile : Profile
 {

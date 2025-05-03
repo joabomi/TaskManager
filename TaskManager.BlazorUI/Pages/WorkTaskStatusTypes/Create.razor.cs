@@ -11,24 +11,18 @@ namespace TaskManager.BlazorUI.Pages.WorkTaskStatusTypes
         public NavigationManager NavigationManager { get; set; }
         [Inject]
         public IWorkTaskStatusTypeService WorkTaskStatusTypeService { get; set; }
-        public WorkTaskStatusTypeVM Model { get; set; } = new WorkTaskStatusTypeVM();
         public string Message { get; set; } = string.Empty;
+        internal WorkTaskStatusTypeVM statusType { get; set; } = new WorkTaskStatusTypeVM();
 
         protected override void OnInitialized()
         {
-            Model = new WorkTaskStatusTypeVM();
+            statusType = new WorkTaskStatusTypeVM();
         }
 
         [Authorize]
-        public async void CreateNewType()
+        public async Task CreateNewType()
         {
-            Message = string.Empty;
-            if (string.IsNullOrEmpty(Model.Name))
-            {
-                Message = "Status Type Name is required.";
-                return;
-            }
-            var result = await WorkTaskStatusTypeService.CreateWorkTaskStatusType(Model);
+            var result = await WorkTaskStatusTypeService.CreateWorkTaskStatusType(statusType);
             if (result.Success)
             {
                 GoBack();
@@ -36,7 +30,9 @@ namespace TaskManager.BlazorUI.Pages.WorkTaskStatusTypes
             else
             {
                 Message = "Failed to create Status Type.";
+                StateHasChanged();
             }
+
         }
 
         public void GoBack()

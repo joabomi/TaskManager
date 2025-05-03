@@ -5,12 +5,12 @@ using Moq;
 using TaskManager.Application.Contracts.Logging;
 using TaskManager.Application.Contracts.Persistence;
 using TaskManager.Application.Features.WorkTask.Queries.GetAllWorkTasks;
-using TaskManager.Application.MappingProfilesh;
+using TaskManager.Application.MappingProfiles;
 using TaskManager.Application.UnitTests.Mocks;
 using TaskManager.Application.Features.WorkTaskPriorityType.Queries.GetAllWorkTaskPriorityTypes;
 using TaskManager.Application.Features.WorkTaskStatusType.Queries.GetAllWorkTaskStatusTypes;
 
-namespace TaskManager.Application.UnitTests.Features.WorkTaskss.Queries;
+namespace TaskManager.Application.UnitTests.Features.WorkTasks.Queries;
 
 public class GetAllWorkTasksQueryHandlerTests
 {

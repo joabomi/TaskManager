@@ -2,14 +2,14 @@
 using Moq;
 using TaskManager.Application.Contracts.Logging;
 using TaskManager.Application.Contracts.Persistence;
-using TaskManager.Application.MappingProfilesh;
+using TaskManager.Application.MappingProfiles;
 using TaskManager.Application.UnitTests.Mocks;
 using TaskManager.Application.Features.WorkTask.Commands.DeleteWorkTask;
 using Shouldly;
 using MediatR;
 using TaskManager.Application.Exceptions;
 
-namespace TaskManager.Application.UnitTests.Features.WorkTaskss.Commands;
+namespace TaskManager.Application.UnitTests.Features.WorkTasks.Commands;
 
 public class DeleteWorkTaskCommandHandlerTests
 {

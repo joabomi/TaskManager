@@ -13,7 +13,7 @@ public partial class Index
     public IWorkTaskPriorityTypeService WorkTaskPriorityTypeService { get; set; }
     public List<WorkTaskPriorityTypeVM> WorkTaskPriorityTypes { get; private set; }
     public string Message { get; set; } = string.Empty;
-    private bool _canDelete { get; set; } = false;
+    private bool _isAdmin { get; set; } = false;
     protected void CreateWorkTaskPriorityType()
     {
         NavigationManager.NavigateTo("/prioritytypes/create");
@@ -50,7 +50,7 @@ public partial class Index
         var user = authState.User;
         if (user.Identity.IsAuthenticated)
         {
-            _canDelete = user.IsInRole("Administrator");
+            _isAdmin = user.IsInRole("Administrator");
         }
 
     }
