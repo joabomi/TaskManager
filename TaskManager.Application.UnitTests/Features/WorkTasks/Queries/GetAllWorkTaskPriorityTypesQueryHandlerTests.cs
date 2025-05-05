@@ -40,7 +40,7 @@ public class GetAllWorkTasksQueryHandlerTests
     {
         var handler = new GetAllWorkTasksQueryHandler(_mapper, _mockRepo.Object, _mockAppLogger.Object, _mockUserService.Object);
 
-        var result = await handler.Handle(new GetAllWorkTasksQuery(false, false), CancellationToken.None);
+        var result = await handler.Handle(new GetAllWorkTasksQuery(IsLoggedAdmin: true, IsLoggedUser: false), CancellationToken.None);
 
         result.ShouldNotBeNull();
         result.ShouldBeOfType<List<WorkTaskDto>>();
