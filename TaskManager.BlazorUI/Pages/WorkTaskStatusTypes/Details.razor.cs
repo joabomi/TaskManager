@@ -9,7 +9,7 @@ namespace TaskManager.BlazorUI.Pages.WorkTaskStatusTypes
         [Inject]
         public IWorkTaskStatusTypeService WorkTaskStatusTypeService { get; set; }
         [Inject]
-        public NavigationManager NavigationManager { get; set; }
+        public INavigationService NavigationService { get; set; }
         public string Message { get; set; } = string.Empty;
         public WorkTaskStatusTypeVM Model { get; set; }
 
@@ -31,11 +31,6 @@ namespace TaskManager.BlazorUI.Pages.WorkTaskStatusTypes
             {
                 Message = "Something went wrong";
             }
-        }
-
-        public void GoBack()
-        {
-            NavigationManager.NavigateTo("/statustypes");
         }
     }
 }

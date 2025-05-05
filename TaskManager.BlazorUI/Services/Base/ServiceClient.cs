@@ -56,12 +56,12 @@ namespace TaskManager.BlazorUI.Services.Base
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<WorkTaskDetailsDto> UsersAsync(string id);
+        System.Threading.Tasks.Task<WorkTaskUserDetailsDto> UsersAsync(string id);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<WorkTaskDetailsDto> UsersAsync(string id, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<WorkTaskUserDetailsDto> UsersAsync(string id, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -110,12 +110,12 @@ namespace TaskManager.BlazorUI.Services.Base
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskDto>> WorkTasksAllAsync();
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskDto>> WorkTasksAllAsync(bool? isLoggedUser, bool? isLoggedAdmin);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskDto>> WorkTasksAllAsync(System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskDto>> WorkTasksAllAsync(bool? isLoggedUser, bool? isLoggedAdmin, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -476,7 +476,7 @@ namespace TaskManager.BlazorUI.Services.Base
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<WorkTaskDetailsDto> UsersAsync(string id)
+        public virtual System.Threading.Tasks.Task<WorkTaskUserDetailsDto> UsersAsync(string id)
         {
             return UsersAsync(id, System.Threading.CancellationToken.None);
         }
@@ -484,7 +484,7 @@ namespace TaskManager.BlazorUI.Services.Base
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<WorkTaskDetailsDto> UsersAsync(string id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<WorkTaskUserDetailsDto> UsersAsync(string id, System.Threading.CancellationToken cancellationToken)
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -529,7 +529,7 @@ namespace TaskManager.BlazorUI.Services.Base
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<WorkTaskDetailsDto>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<WorkTaskUserDetailsDto>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -1004,15 +1004,15 @@ namespace TaskManager.BlazorUI.Services.Base
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskDto>> WorkTasksAllAsync()
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskDto>> WorkTasksAllAsync(bool? isLoggedUser, bool? isLoggedAdmin)
         {
-            return WorkTasksAllAsync(System.Threading.CancellationToken.None);
+            return WorkTasksAllAsync(isLoggedUser, isLoggedAdmin, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskDto>> WorkTasksAllAsync(System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskDto>> WorkTasksAllAsync(bool? isLoggedUser, bool? isLoggedAdmin, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -1027,6 +1027,16 @@ namespace TaskManager.BlazorUI.Services.Base
                 
                     // Operation Path: "api/WorkTasks"
                     urlBuilder_.Append("api/WorkTasks");
+                    urlBuilder_.Append('?');
+                    if (isLoggedUser != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("isLoggedUser")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(isLoggedUser, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (isLoggedAdmin != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("isLoggedAdmin")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(isLoggedAdmin, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -2236,8 +2246,8 @@ namespace TaskManager.BlazorUI.Services.Base
         [System.Text.Json.Serialization.JsonPropertyName("endDate")]
         public System.DateTimeOffset EndDate { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("assignedEmployeeId")]
-        public string AssignedEmployeeId { get; set; }
+        [System.Text.Json.Serialization.JsonPropertyName("assignedPersonId")]
+        public string AssignedPersonId { get; set; }
 
     }
 
@@ -2337,6 +2347,24 @@ namespace TaskManager.BlazorUI.Services.Base
 
         [System.Text.Json.Serialization.JsonPropertyName("name")]
         public string Name { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "14.4.0.0 (NJsonSchema v11.3.2.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class WorkTaskUserDetailsDto
+    {
+
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public string Id { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("email")]
+        public string Email { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("firstName")]
+        public string FirstName { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("lastName")]
+        public string LastName { get; set; }
 
     }
 

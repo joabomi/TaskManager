@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Moq;
+﻿using Moq;
 using TaskManager.Application.Contracts.Persistence;
-using TaskManager.Application.Features.WorkTaskPriorityType.Queries.GetWorkTaskPriorityDetails;
 using TaskManager.Domain;
 
 namespace TaskManager.Application.UnitTests.Mocks;
@@ -49,7 +43,7 @@ public class MockWorkTaskRepository
                 EndDate = new DateTime(2024, 4, 10),
                 AssignedPersonId = "User4"
             },
-        }; 
+        };
         var workTaskPriorityTypes = new List<WorkTaskPriorityType>()
         {
             new WorkTaskPriorityType
@@ -82,7 +76,7 @@ public class MockWorkTaskRepository
                 Name = "Higher",
                 PriorityWeight = 600,
             }
-        }; 
+        };
         var workTaskStatusTypes = new List<WorkTaskStatusType>()
         {
             new WorkTaskStatusType
@@ -150,7 +144,7 @@ public class MockWorkTaskRepository
                     itemToUpdate.AssignedPersonId = workTask.AssignedPersonId;
                     SetWorkTaskDetails(workTaskPriorityTypes, workTaskStatusTypes, workTask);
                 }
-                
+
                 return Task.CompletedTask;
             });
 

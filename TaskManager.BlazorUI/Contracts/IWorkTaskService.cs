@@ -5,7 +5,8 @@ namespace TaskManager.BlazorUI.Contracts;
 
 public interface IWorkTaskService
 {
-    Task<List<WorkTaskVM>> GetWorkTasks();
+    Task<List<WorkTaskVM>> GetAdminWorkTasks();
+    Task<List<WorkTaskVM>> GetUserWorkTasks();
     Task<WorkTaskVM> GetWorkTaskDetails(int id);
     Task<Response<int>> CreateWorkTask(WorkTaskVM workTask);
     Task<Response<Guid>> UpdateWorkTask(int id, WorkTaskVM workTask);

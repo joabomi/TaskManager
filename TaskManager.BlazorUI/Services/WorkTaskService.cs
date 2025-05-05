@@ -55,9 +55,15 @@ namespace TaskManager.BlazorUI.Services
             return _mapper.Map<WorkTaskVM>(workTaskDetails);
         }
 
-        public async Task<List<WorkTaskVM>> GetWorkTasks()
+        public async Task<List<WorkTaskVM>> GetAdminWorkTasks()
         {
-            var workTasks = await _client.WorkTasksAllAsync();
+            var workTasks = await _client.WorkTasksAllAsync(isLoggedUser: false, isLoggedAdmin: true);
+            return _mapper.Map<List<WorkTaskVM>>(workTasks);
+        }
+
+        public async Task<List<WorkTaskVM>> GetUserWorkTasks()
+        {
+            var workTasks = await _client.WorkTasksAllAsync(isLoggedUser: true, isLoggedAdmin: false);
             return _mapper.Map<List<WorkTaskVM>>(workTasks);
         }
 

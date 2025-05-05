@@ -31,7 +31,7 @@ namespace TaskManager.Api.Controllers
 
         // GET api/<UsersController>/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<WorkTaskDetailsDto>> Get(string id)
+        public async Task<ActionResult<WorkTaskUserDetailsDto>> Get(string id)
         {
             var user = await _mediator.Send(new GetWorkTaskUserDetailsQuery(id));
             return Ok(user);

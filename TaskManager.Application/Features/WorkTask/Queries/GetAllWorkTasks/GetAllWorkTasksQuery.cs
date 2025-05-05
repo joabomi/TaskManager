@@ -8,4 +8,4 @@ using TaskManager.Application.Features.WorkTaskStatusType.Queries.GetAllWorkTask
 
 namespace TaskManager.Application.Features.WorkTask.Queries.GetAllWorkTasks;
 
-public record GetAllWorkTasksQuery : IRequest<List<WorkTaskDto>>;
+public record GetAllWorkTasksQuery(bool IsLoggedUser, bool IsLoggedAdmin) : IRequest<List<WorkTaskDto>>;

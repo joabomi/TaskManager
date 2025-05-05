@@ -1,5 +1,7 @@
 using global::TaskManager.BlazorUI.Contracts;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
+using TaskManager.BlazorUI.Models;
 using TaskManager.BlazorUI.Models.WorkTasks;
 using TaskManager.BlazorUI.Services;
 
@@ -49,16 +51,38 @@ public partial class Index
 
     protected override async Task OnInitializedAsync()
     {
-        WorkTasks = await WorkTaskService.GetWorkTasks();
-
-        var users = await UserService.GetUsers();
-        UserNamesById = users.ToDictionary(user => user.Id, user => $"{user.FirstName} {user.LastName}");
-
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
+        Console.WriteLine($"User: {user.Identity.Name}");
         if (user.Identity.IsAuthenticated)
         {
-            _canDelete = user.IsInRole("Administrator");
+            bool isAdmin = user.IsInRole("Administrator");
+            Console.WriteLine($"Is Admin: {isAdmin}");
+            bool isUser = user.IsInRole("TaskManagerUser");
+            Console.WriteLine($"Is User: {isUser}");
+            _canDelete = isAdmin;
+            if (isAdmin)
+            {
+                WorkTasks = await WorkTaskService.GetAdminWorkTasks();
+
+                var users = await UserService.GetUsers();
+                UserNamesById = users.ToDictionary(user => user.Id, user => $"{user.FirstName} {user.LastName}");
+            }
+            else if (isUser)
+            {
+                WorkTasks = await WorkTaskService.GetUserWorkTasks();
+                Console.WriteLine($"WorkTasks: {WorkTasks.Count}");
+                var id = user.Claims.Where(c => c.Type == "uid").FirstOrDefault()?.Value;
+                if(!string.IsNullOrEmpty(id))
+                {
+                    var users = await UserService.GetUsers();
+                    UserNamesById = users.Where(u => u.Id == id).ToDictionary(user => user.Id, user => $"{user.FirstName} {user.LastName}");
+                }
+            }
+            else
+            {
+                WorkTasks = new List<WorkTaskVM>();
+            }
         }
 
     }

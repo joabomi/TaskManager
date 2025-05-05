@@ -17,11 +17,12 @@ public class UserService : IUserService
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly IHttpContextAccessor _contextAccessor;
 
-    public string UserId { get => _contextAccessor.HttpContext?.User?.FindFirst("uid").ToString(); }
+    public string UserId { get => _contextAccessor.HttpContext?.User?.FindFirst("uid").Value; }
 
-    public UserService(UserManager<ApplicationUser> userManager)
+    public UserService(UserManager<ApplicationUser> userManager, IHttpContextAccessor contextAccessor)
     {
         _userManager = userManager;
+        _contextAccessor = contextAccessor;
     }
 
     public async Task<TaskManagerUser> GetUser(string userId)

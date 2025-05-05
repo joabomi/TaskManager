@@ -1,27 +1,39 @@
-﻿@page "/statustypes/details/{id:int}"
+﻿@page "/worktasks/details/{id:int}"
 @using TaskManager.BlazorUI.Contracts
 @using TaskManager.BlazorUI.Models.WorkTaskStatusTypes
 
-<h3>Status Type Details</h3>
+<h3>Work Task Details</h3>
 
 <AuthorizeView>
 	<Authorized>
 		<div class="row">
 			<div class="col-md-4">
 
-				@if(Model != null)
+				@if(WorkTask != null)
 				{
 					<table class="table">
 						<thead>
 							<tr>
 								<th> Id </th>
 								<th> Name </th>
+								<th> Description </th>
+								<th> Status </th>
+								<th> Priority </th>
+								<th> Start Date </th>
+								<th> End Date </th>
+								<th> Assigned to </th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td> @Model.Id </td>
-								<td> @Model.Name </td>
+								<td> @WorkTask.Id </td>
+								<td> @WorkTask.Name </td>
+								<td> @WorkTask.Description </td>
+								<td> @WorkTask.Status.Name </td>
+								<td> @WorkTask.Priority.Name </td>
+								<td> @WorkTask.StartDate.ToString("yyyy-MM-dd") </td>
+								<td> @WorkTask.EndDate.ToString("yyyy-MM-dd") </td>
+								<td> @user.FirstName @user.LastName </td>								
 							</tr>
 						</tbody>
 					</table>

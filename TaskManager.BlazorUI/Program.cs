@@ -31,6 +31,7 @@ builder.Services.AddScoped<IWorkTaskStatusTypeService, WorkTaskStatusTypeService
 builder.Services.AddScoped<IWorkTaskPriorityTypeService, WorkTaskPriorityTypeService>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<INavigationService, NavigationService>();
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 

@@ -1,0 +1,25 @@
+﻿@page "/worktasks/edit/{id:int}"
+@using TaskManager.BlazorUI.Contracts
+
+@if (!string.IsNullOrEmpty(Message))
+{
+	<div class="alert alert-danger">
+		@Message
+	</div>
+}
+
+<AuthorizeView Context="authContext" Roles="Administrator, TaskManagerUser">
+	<Authorized>
+		<FormComponent WorkTask="workTask"
+					   WorkTaskStatusTypes="workTaskStatusTypes"
+					   WorkTaskPriorityTypes="workTaskPriorityTypes"
+					   Users="users"
+					   OnValidSubmit="EditWorkTask"
+					   ButtonText="Create" />
+	</Authorized>
+	<NotAuthorized>
+		<div class="alert alert-danger">
+			<p>You are not authorized to view this page.</p>
+		</div>
+	</NotAuthorized>
+</AuthorizeView>

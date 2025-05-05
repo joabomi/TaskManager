@@ -8,7 +8,7 @@ namespace TaskManager.BlazorUI.Pages.WorkTaskStatusTypes;
 public partial class Edit
 {
     [Inject]
-    public NavigationManager NavigationManager { get; set; }
+    public INavigationService NavigationService { get; set; }
     [Inject]
     public IWorkTaskStatusTypeService WorkTaskStatusTypeService { get; set; }
     internal WorkTaskStatusTypeVM statusType { get; set; } = new WorkTaskStatusTypeVM();
@@ -28,16 +28,11 @@ public partial class Edit
         var result = await WorkTaskStatusTypeService.UpdateWorkTaskStatusType(id, statusType);
         if (result.Success)
         {
-            GoBack();
+            NavigationService.GoBack();
         }
         else
         {
             Message = "Something went wrong.";
         }
-    }
-
-    public void GoBack()
-    {
-        NavigationManager.NavigateTo("/statustypes");
     }
 }

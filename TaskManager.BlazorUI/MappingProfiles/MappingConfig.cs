@@ -23,8 +23,12 @@ public class MappingConfig : Profile
         CreateMap<CreateWorkTaskCommand, WorkTaskVM>().ReverseMap();
         CreateMap<UpdateWorkTaskCommand, WorkTaskVM>().ReverseMap();
         CreateMap<WorkTaskUserDto, UserVM>().ReverseMap();
+        CreateMap<WorkTaskUserDetailsDto, UserVM>().ReverseMap();
 
         CreateMap<WorkTaskDto, WorkTaskVM>()
+            .ForMember(dest => dest.StartDate, opt => opt.MapFrom(src => src.StartDate.LocalDateTime))
+            .ForMember(dest => dest.EndDate, opt => opt.MapFrom(src => src.EndDate.LocalDateTime)).ReverseMap();
+        CreateMap<WorkTaskDetailsDto, WorkTaskVM>()
             .ForMember(dest => dest.StartDate, opt => opt.MapFrom(src => src.StartDate.LocalDateTime))
             .ForMember(dest => dest.EndDate, opt => opt.MapFrom(src => src.EndDate.LocalDateTime)).ReverseMap();
     }

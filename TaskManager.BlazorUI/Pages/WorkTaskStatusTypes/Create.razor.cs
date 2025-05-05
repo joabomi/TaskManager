@@ -8,7 +8,7 @@ namespace TaskManager.BlazorUI.Pages.WorkTaskStatusTypes
     public partial class Create
     {
         [Inject]
-        public NavigationManager NavigationManager { get; set; }
+        public INavigationService NavigationService { get; set; }
         [Inject]
         public IWorkTaskStatusTypeService WorkTaskStatusTypeService { get; set; }
         public string Message { get; set; } = string.Empty;
@@ -25,19 +25,13 @@ namespace TaskManager.BlazorUI.Pages.WorkTaskStatusTypes
             var result = await WorkTaskStatusTypeService.CreateWorkTaskStatusType(statusType);
             if (result.Success)
             {
-                GoBack();
+                NavigationService.GoBack();
             }
             else
             {
                 Message = "Failed to create Status Type.";
-                StateHasChanged();
             }
 
-        }
-
-        public void GoBack()
-        {
-            NavigationManager.NavigateTo("/statustypes");
         }
     }
 }

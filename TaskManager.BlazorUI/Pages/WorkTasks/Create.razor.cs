@@ -10,11 +10,13 @@ namespace TaskManager.BlazorUI.Pages.WorkTasks
 {
     public partial class Create
     {
-        [Inject]
-        public NavigationManager NavigationManager { get; set; }
+        [Inject] 
+        public INavigationService NavigationService { get; set; }
 
         [Inject]
         public IWorkTaskService WorkTaskService { get; set; }
+
+        internal WorkTaskVM workTask { get; set; } = new WorkTaskVM();
 
         [Inject]
         public IWorkTaskStatusTypeService WorkTaskStatusTypeService { get; set; }
@@ -28,8 +30,6 @@ namespace TaskManager.BlazorUI.Pages.WorkTasks
         [Inject]
         public IUserService UserService { get; set; }
         internal List<UserVM> users { get; set; } = new List<UserVM>();
-
-        internal WorkTaskVM workTask { get; set; } = new WorkTaskVM();
 
         public string Message { get; set; } = string.Empty;
 
@@ -47,7 +47,7 @@ namespace TaskManager.BlazorUI.Pages.WorkTasks
             var result = await WorkTaskService.CreateWorkTask(workTask);
             if (result.Success)
             {
-                NavigationManager.NavigateTo("/worktasks");
+                NavigationService.GoBack();
             }
             else
             {

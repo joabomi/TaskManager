@@ -8,7 +8,7 @@ namespace TaskManager.BlazorUI.Pages.WorkTaskPriorityTypes;
 public partial class Edit
 {
     [Inject]
-    public NavigationManager NavigationManager { get; set; }
+    public INavigationService NavigationService { get; set; }
     [Inject]
     public IWorkTaskPriorityTypeService WorkTaskPriorityTypeService { get; set; }
     internal WorkTaskPriorityTypeVM priorityType { get; set; } = new WorkTaskPriorityTypeVM();
@@ -28,16 +28,11 @@ public partial class Edit
         var result = await WorkTaskPriorityTypeService.UpdateWorkTaskPriorityType(id, priorityType);
         if (result.Success)
         {
-            GoBack();
+            NavigationService.GoBack();
         }
         else
         {
             Message = "Something went wrong.";
         }
-    }
-
-    public void GoBack()
-    {
-        NavigationManager.NavigateTo("/prioritytypes");
     }
 }

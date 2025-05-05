@@ -21,4 +21,10 @@ public class UserService : BaseHttpService, IUserService
         var usersList = await _client.UsersAllAsync();
         return _mapper.Map<List<UserVM>>(usersList);
     }
+
+    public async Task<UserVM> GetUser(string id)
+    {
+        var user = await _client.UsersAsync(id);
+        return _mapper.Map<UserVM>(user);
+    }
 }

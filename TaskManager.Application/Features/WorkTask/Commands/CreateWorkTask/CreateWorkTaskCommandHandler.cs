@@ -62,7 +62,7 @@ public class CreateWorkTaskCommandHandler : IRequestHandler<CreateWorkTaskComman
                 await _emailSender.SendEmail(new Email
                 {
                     To = assignedUser.Email,
-                    Subject = $"New WorkTask Assigned - ",
+                    Subject = $"New WorkTask Assigned - {workTaskToCreate.Name}",
                     Body = $"A new WorkTask has been assigned to you. Task Name: {workTaskToCreate.Name}"
                 });
                 _logger.LogInformation("Email sent to assigned user {0}", assignedUser.Email);

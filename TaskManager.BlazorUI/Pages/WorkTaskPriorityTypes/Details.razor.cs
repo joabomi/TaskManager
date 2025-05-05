@@ -9,7 +9,7 @@ namespace TaskManager.BlazorUI.Pages.WorkTaskPriorityTypes
         [Inject]
         public IWorkTaskPriorityTypeService WorkTaskPriorityTypeService { get; set; }
         [Inject]
-        public NavigationManager NavigationManager { get; set; }
+        public INavigationService NavigationService { get; set; }
         public string Message { get; set; } = string.Empty;
         public WorkTaskPriorityTypeVM Model { get; set; }
 
@@ -31,11 +31,6 @@ namespace TaskManager.BlazorUI.Pages.WorkTaskPriorityTypes
             {
                 Message = "Something went wrong";
             }
-        }
-
-        public void GoBack()
-        {
-            NavigationManager.NavigateTo("/prioritytypes");
         }
     }
 }

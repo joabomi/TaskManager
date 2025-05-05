@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components;
-using TaskManager.Application.Features.WorkTaskPriorityType.Queries.GetAllWorkTaskPriorityTypes;
-using TaskManager.Application.Features.WorkTaskStatusType.Queries.GetAllWorkTaskStatusTypes;
+using Microsoft.AspNetCore.Components.Authorization;
+using TaskManager.BlazorUI.Contracts;
 using TaskManager.BlazorUI.Models;
 using TaskManager.BlazorUI.Models.WorkTaskPriorityTypes;
 using TaskManager.BlazorUI.Models.WorkTasks;
@@ -10,7 +10,8 @@ namespace TaskManager.BlazorUI.Pages.WorkTasks;
 
 public partial class FormComponent
 {
-    [Inject] private NavigationManager _navigationManager { get; set; } = default!;
+    [Inject] private INavigationService _navigationService { get; set; }
+    [Inject] private AuthenticationStateProvider _authenticationStateProvider { get; set; }
     [Parameter] public bool Disabled { get; set; } = false;
     [Parameter] public WorkTaskVM WorkTask { get; set; } = new();
     [Parameter] public string ButtonText { get; set; } = "Save";
@@ -19,8 +20,13 @@ public partial class FormComponent
     [Parameter] public List<WorkTaskPriorityTypeVM> WorkTaskPriorityTypes { get; set; } = new List<WorkTaskPriorityTypeVM>();
     [Parameter] public List<UserVM> Users { get; set; } = new List<UserVM>();
 
-    public void GoBack()
+    private bool IsAdmin { get; set; }
+
+    protected override async Task OnInitializedAsync()
     {
-        _navigationManager.NavigateTo("/worktasks");
+        var authState = await _authenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        IsAdmin = user.IsInRole("Administrator");
     }
 }

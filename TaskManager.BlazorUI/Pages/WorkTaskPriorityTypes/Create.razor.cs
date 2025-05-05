@@ -8,10 +8,13 @@ namespace TaskManager.BlazorUI.Pages.WorkTaskPriorityTypes
     public partial class Create
     {
         [Inject]
-        public NavigationManager NavigationManager { get; set; }
+        public INavigationService NavigationService { get; set; }
+
         [Inject]
         public IWorkTaskPriorityTypeService WorkTaskPriorityTypeService { get; set; }
+
         internal WorkTaskPriorityTypeVM priorityType { get; set; } = new WorkTaskPriorityTypeVM();
+
         public string Message { get; set; } = string.Empty;
 
         protected override void OnInitialized()
@@ -27,17 +30,12 @@ namespace TaskManager.BlazorUI.Pages.WorkTaskPriorityTypes
 
             if (result.Success)
             {
-                NavigationManager.NavigateTo("/prioritytypes");
+                NavigationService.GoBack();
             }
             else
             {
                 Message = "Failed to create Priority Type.";
             }
-        }
-
-        public void GoBack()
-        {
-            NavigationManager.NavigateTo("/prioritytypes");
         }
     }
 }

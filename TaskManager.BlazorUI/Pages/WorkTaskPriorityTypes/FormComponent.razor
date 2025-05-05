@@ -21,9 +21,12 @@
 	</fieldset>
 	@if (!Disabled)
 	{
-		<button type="submit" class="btn btn-success btn-block">
-			@ButtonText
-		</button>
+		<div style="margin-top: 10px">
+			<button type="submit" class="btn btn-success btn-block">
+				@ButtonText
+			</button>
+			<input type="button" value="Cancel" class="btn btn-outline-primary" onclick="@_navigationService.GoBack" />
+		</div>
 	}
 </EditForm>
 
