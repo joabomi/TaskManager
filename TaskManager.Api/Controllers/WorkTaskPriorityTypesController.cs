@@ -13,7 +13,6 @@ namespace TaskManager.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
 public class WorkTaskPriorityTypesController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -41,16 +40,18 @@ public class WorkTaskPriorityTypesController : ControllerBase
 
     // POST api/<WorkTaskPriorityTypesController>
     [HttpPost]
+    [Authorize(Roles = "Administrator")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<int>> Post(CreateWorkTaskPriorityTypeCommand priorityType)
     {
         var response = await _mediator.Send(priorityType);
-        return Ok(response);
+        return CreatedAtAction(nameof(Get), new { id = response }, response);
     }
 
     // PUT api/<WorkTaskPriorityTypesController>/5
     [HttpPut("{id}")]
+    [Authorize(Roles = "Administrator")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -63,6 +64,7 @@ public class WorkTaskPriorityTypesController : ControllerBase
 
     // DELETE api/<WorkTaskPriorityTypesController>/5
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Administrator")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesDefaultResponseType]

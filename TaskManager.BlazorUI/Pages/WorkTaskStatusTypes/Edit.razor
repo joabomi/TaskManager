@@ -1,0 +1,21 @@
+﻿@page "/statustypes/edit/{id:int}"
+@using TaskManager.BlazorUI.Contracts
+@using TaskManager.BlazorUI.Models.WorkTaskStatusTypes
+
+@if (!string.IsNullOrEmpty(Message))
+{
+	<div class="alert alert-danger">
+		@Message
+		</div>
+}
+
+<AuthorizeView Context="authContext" Roles="Administrator">
+	<Authorized>
+		<FormComponent ButtonText="Update" StatusType="statusType" OnValidSubmit="EditStatusType" />
+	</Authorized>
+	<NotAuthorized>
+		<div class="alert alert-danger">
+			<p>You are not authorized to view this page.</p>
+		</div>
+	</NotAuthorized>
+</AuthorizeView>

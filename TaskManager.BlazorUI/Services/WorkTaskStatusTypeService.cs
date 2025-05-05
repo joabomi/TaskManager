@@ -20,7 +20,6 @@ namespace TaskManager.BlazorUI.Services
         {
             try
             {
-                await AddBearerToken();
                 var createWorkTaskStatusTypeCommand = _mapper.Map<CreateWorkTaskStatusTypeCommand>(workTaskStatusType);
                 var response = await _client.WorkTaskStatusTypesPOSTAsync(createWorkTaskStatusTypeCommand);
                 return new Response<int>()
@@ -31,7 +30,7 @@ namespace TaskManager.BlazorUI.Services
             }
             catch (ApiException ex)
             {
-                return ConverApiExceptions<int>(ex);
+                return ConvertApiExceptions<int>(ex);
             }
         }
 
@@ -39,7 +38,6 @@ namespace TaskManager.BlazorUI.Services
         {
             try
             {
-                await AddBearerToken();
                 await _client.WorkTaskStatusTypesDELETEAsync(id);
                 return new Response<Guid>()
                 {
@@ -48,20 +46,18 @@ namespace TaskManager.BlazorUI.Services
             }
             catch (ApiException ex)
             {
-                return ConverApiExceptions<Guid>(ex);
+                return ConvertApiExceptions<Guid>(ex);
             }
         }
 
         public async Task<WorkTaskStatusTypeVM> GetWorkTaskStatusTypeDetails(int id)
         {
-            await AddBearerToken();
             var workTaskStatusTypeDetails = await _client.WorkTaskStatusTypesGETAsync(id);
             return _mapper.Map<WorkTaskStatusTypeVM>(workTaskStatusTypeDetails);
         }
 
         public async Task<List<WorkTaskStatusTypeVM>> GetWorkTaskStatusTypes()
         {
-            await AddBearerToken();
             var workTaskStatusTypes = await _client.WorkTaskStatusTypesAllAsync();
             return _mapper.Map<List<WorkTaskStatusTypeVM>>(workTaskStatusTypes);
         }
@@ -70,7 +66,6 @@ namespace TaskManager.BlazorUI.Services
         {
             try
             {
-                await AddBearerToken();
                 var updateWorkTaskStatusTypeCommand = _mapper.Map<UpdateWorkTaskStatusTypeCommand>(workTaskStatusType);
                 await _client.WorkTaskStatusTypesPUTAsync(id.ToString(), updateWorkTaskStatusTypeCommand);
                 return new Response<Guid>()
@@ -80,7 +75,7 @@ namespace TaskManager.BlazorUI.Services
             }
             catch (ApiException ex)
             {
-                return ConverApiExceptions<Guid>(ex);
+                return ConvertApiExceptions<Guid>(ex);
             }
         }
     }

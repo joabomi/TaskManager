@@ -20,5 +20,5 @@ public class WorkTaskDto
     public int PriorityId { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
-    public string AssignedEmployeeId { get; set; } = string.Empty;
+    public string AssignedPersonId { get; set; } = string.Empty;
 }

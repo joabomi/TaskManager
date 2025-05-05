@@ -1,0 +1,26 @@
+﻿
+<EditForm Model="@StatusType" OnValidSubmit="OnValidSubmit">
+	<DataAnnotationsValidator />
+	<ValidationSummary />
+
+	<fieldset disabled ="@Disabled">
+		<div class="form-group">
+			<label class="control-label">Priority Type Name:</label>
+			<div>
+				<InputText id="prioritytypename" class="form-control" @bind-Value="@StatusType.Name"></InputText>
+				<ValidationMessage For="@(() => StatusType.Name)" />
+			</div>
+		</div>
+	</fieldset>
+	@if (!Disabled)
+	{
+		<div style="margin-top: 10px">
+			<button type="submit" class="btn btn-success btn-block">
+				@ButtonText
+			</button>
+			<input type="button" value="Cancel" class="btn btn-outline-primary" onclick="@_navigationService.GoBack" />
+		</div>
+	}
+</EditForm>
+
+

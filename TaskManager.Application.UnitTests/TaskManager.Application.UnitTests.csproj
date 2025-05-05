@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TaskManager.Application\TaskManager.Application.csproj" />
+    <ProjectReference Include="..\TaskManager.Identity\TaskManager.Identity.csproj" />
   </ItemGroup>
 
   <ItemGroup>

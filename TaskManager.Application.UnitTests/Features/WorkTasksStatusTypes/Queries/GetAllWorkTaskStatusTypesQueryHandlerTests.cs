@@ -9,7 +9,7 @@ using Shouldly;
 using TaskManager.Application.Contracts.Logging;
 using TaskManager.Application.Contracts.Persistence;
 using TaskManager.Application.Features.WorkTaskStatusType.Queries.GetAllWorkTaskStatusTypes;
-using TaskManager.Application.MappingProfilesh;
+using TaskManager.Application.MappingProfiles;
 using TaskManager.Application.UnitTests.Mocks;
 
 namespace TaskManager.Application.UnitTests.Features.WorkTasksStatusTypes.Queries;

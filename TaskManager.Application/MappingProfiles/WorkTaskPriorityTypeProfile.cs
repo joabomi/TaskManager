@@ -6,7 +6,7 @@ using TaskManager.Application.Features.WorkTaskPriorityType.Commands.DeleteWorkT
 using TaskManager.Application.Features.WorkTaskPriorityType.Commands.UpdateWorkTaskPriorityType;
 using TaskManager.Application.Features.WorkTaskPriorityType.Commands.CreateWorkTaskPriorityType;
 
-namespace TaskManager.Application.MappingProfilesh;
+namespace TaskManager.Application.MappingProfiles;
 
 public class WorkTaskPriorityTypeProfile : Profile
 {

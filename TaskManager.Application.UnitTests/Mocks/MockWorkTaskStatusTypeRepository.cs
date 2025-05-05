@@ -1,14 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-using Moq;
-using Shouldly;
+﻿using Moq;
 using TaskManager.Application.Contracts.Persistence;
-using TaskManager.Application.Features.WorkTask.Commands.CreateWorkTask;
-using TaskManager.Application.Features.WorkTaskStatusType.Commands.DeleteWorkTaskStatusType;
 using TaskManager.Domain;
 
 namespace TaskManager.Application.UnitTests.Mocks;
@@ -46,9 +37,9 @@ public class MockWorkTaskStatusTypeRepository
                 Name = "Canceled"
             }
         };
-        
+
         var mockRepo = new Mock<IWorkTaskStatusTypeRepository>();
-        
+
         mockRepo.Setup(r => r.GetAsync()).ReturnsAsync(workTaskStatusTypes);
 
         mockRepo.Setup(r => r.GetByIdAsync(It.IsAny<int>()))
@@ -93,7 +84,7 @@ public class MockWorkTaskStatusTypeRepository
                 bool res = !workTaskStatusTypes.Any(w => w.Name == name);
                 return Task.FromResult(res);
             });
-        
+
         return mockRepo;
     }
 }

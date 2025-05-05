@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using TaskManager.Domain;
-using TaskManager.Application.Features.WorkTaskStatusType.Queries.GetAllWorkTaskStatusTypes;
-using TaskManager.Application.Features.WorkTaskStatusType.Queries.GetWorkTaskStatusTypeDetails;
-using System.Runtime.CompilerServices;
+﻿using AutoMapper;
 using TaskManager.Application.Features.WorkTaskStatusType.Commands.CreateWorkTaskStatusType;
 using TaskManager.Application.Features.WorkTaskStatusType.Commands.UpdateWorkTaskStatusType;
-using TaskManager.Application.Features.WorkTaskStatusType.Commands.DeleteWorkTaskStatusType;
+using TaskManager.Application.Features.WorkTaskStatusType.Queries.GetAllWorkTaskStatusTypes;
+using TaskManager.Application.Features.WorkTaskStatusType.Queries.GetWorkTaskStatusTypeDetails;
+using TaskManager.Domain;
 
-namespace TaskManager.Application.MappingProfilesh;
+namespace TaskManager.Application.MappingProfiles;
 
 public class WorkTaskStatusTypeProfile : Profile
 {

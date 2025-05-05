@@ -93,6 +93,13 @@ public class MockWorkTaskPriorityTypeRepository
                 return Task.FromResult(res);
             });
 
+        mockRepo.Setup(r => r.IsWorkPriorityTypeUpdateValid(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<int>()))
+            .Returns((string name, int weight, int id) =>
+            {
+                bool res = !workTaskPriorityTypes.Any(w => (w.Name == name || w.PriorityWeight == weight) && w.Id != id);
+                return Task.FromResult(res);
+            });
+
         return mockRepo;
     }
 }

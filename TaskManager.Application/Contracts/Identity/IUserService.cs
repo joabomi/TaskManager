@@ -11,4 +11,5 @@ public interface IUserService
 {
     Task<List<TaskManagerUser>> GetUsers();
     Task<TaskManagerUser> GetUser(string userId);
+    public string UserId { get; }
 }

@@ -1,0 +1,20 @@
+﻿@page "/worktasks/create"
+@using TaskManager.BlazorUI.Contracts
+@using TaskManager.BlazorUI.Models.WorkTaskPriorityTypes
+
+<AuthorizeView Context="authContext" Roles="Administrator">
+	<Authorized>
+		<h3>Create New Work Task Priority Type</h3>
+		<FormComponent WorkTask="workTask" 
+			WorkTaskStatusTypes="workTaskStatusTypes" 
+			WorkTaskPriorityTypes="workTaskPriorityTypes" 
+			Users="users"
+			OnValidSubmit="CreateTask"
+			ButtonText="Create" /> 
+	</Authorized>
+	<NotAuthorized>
+		<div class="alert alert-danger">
+			<p>You are not authorized to view this page.</p>
+		</div>
+	</NotAuthorized>
+</AuthorizeView>

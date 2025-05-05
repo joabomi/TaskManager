@@ -1,12 +1,12 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Mvc;
 using TaskManager.Application.Features.WorkTask.Commands.CreateWorkTask;
 using TaskManager.Application.Features.WorkTask.Commands.DeleteWorkTask;
 using TaskManager.Application.Features.WorkTask.Commands.UpdateWorkTask;
 using TaskManager.Application.Features.WorkTask.Queries.GetAllWorkTasks;
 using TaskManager.Application.Features.WorkTask.Queries.GetWorkTaskDetails;
-using TaskManager.Domain;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,7 +14,6 @@ namespace TaskManager.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
 public class WorkTasksController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -26,9 +25,9 @@ public class WorkTasksController : ControllerBase
 
     // GET: api/<WorkTasksController>
     [HttpGet]
-    public async Task<ActionResult<List<WorkTaskDto>>> Get()
+    public async Task<ActionResult<List<WorkTaskDto>>> Get(bool isLoggedUser = false, bool isLoggedAdmin = false)
     {
-        var workTasks = await _mediator.Send(new GetAllWorkTasksQuery());
+        var workTasks = await _mediator.Send(new GetAllWorkTasksQuery(isLoggedUser, isLoggedAdmin));
         return Ok(workTasks);
     }
 
@@ -47,7 +46,7 @@ public class WorkTasksController : ControllerBase
     public async Task<ActionResult<int>> Post(CreateWorkTaskCommand workTask)
     {
         var response = await _mediator.Send(workTask);
-        return Ok(response);
+        return CreatedAtAction(nameof(Get), new { id = response }, response);
     }
 
     // PUT api/<WorkTasksController>/5
@@ -65,6 +64,7 @@ public class WorkTasksController : ControllerBase
 
     // DELETE api/<WorkTasksController>/5
     [HttpDelete("{id}")]
+    [Authorize(Roles = "Administrator")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesDefaultResponseType]

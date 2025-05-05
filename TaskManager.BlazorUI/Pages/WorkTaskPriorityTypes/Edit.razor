@@ -1,0 +1,22 @@
+﻿@page "/prioritytypes/edit/{id:int}"
+@using TaskManager.BlazorUI.Contracts
+@using TaskManager.BlazorUI.Models.WorkTaskPriorityTypes
+
+@if (string.IsNullOrEmpty(Message) == false)
+{
+	<div class="alert alert-danger">
+		@Message
+	</div>
+}
+
+<AuthorizeView Context="authContext" Roles="Administrator">
+	<Authorized>
+		<h3>Edit Priority Type</h3>
+		<FormComponent ButtonText="Update" PriorityType="priorityType" OnValidSubmit="@EditPriorityType" />
+	</Authorized>
+	<NotAuthorized>
+		<div class="alert alert-danger">
+			<p>You are not authorized to view this page.</p>
+		</div>
+	</NotAuthorized>
+</AuthorizeView>

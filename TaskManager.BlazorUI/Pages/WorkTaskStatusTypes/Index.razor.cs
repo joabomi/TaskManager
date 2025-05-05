@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using TaskManager.BlazorUI.Contracts;
 using TaskManager.BlazorUI.Models.WorkTaskStatusTypes;
 
@@ -13,6 +14,8 @@ public partial class Index
     public IWorkTaskStatusTypeService WorkTaskStatusTypeService { get; set; }
     public List<WorkTaskStatusTypeVM> WorkTaskStatusTypes { get; private set; }
     public string Message { get; set; } = string.Empty;
+    private bool _isAdmin { get; set; } = false;
+
     protected void CreateWorkTaskStatusType()
     {
         NavigationManager.NavigateTo("/statustypes/create");
@@ -30,8 +33,9 @@ public partial class Index
     protected async Task DeleteStatusType(int id)
     {
         var response = await WorkTaskStatusTypeService.DeleteWorkTaskStatusType(id);
-        if(response.Success)
+        if (response.Success)
         {
+            WorkTaskStatusTypes.RemoveAll(WorkTaskStatusTypes => WorkTaskStatusTypes.Id == id);
             StateHasChanged();
         }
         else
@@ -43,5 +47,13 @@ public partial class Index
     protected override async Task OnInitializedAsync()
     {
         WorkTaskStatusTypes = await WorkTaskStatusTypeService.GetWorkTaskStatusTypes();
+
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        if (user.Identity.IsAuthenticated)
+        {
+            _isAdmin = user.IsInRole("Administrator");
+        }
+
     }
 }

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using TaskManager.Application.Contracts.Identity;
 using TaskManager.Application.Models.Identity;
@@ -13,10 +15,14 @@ namespace TaskManager.Identity.Services;
 public class UserService : IUserService
 {
     private readonly UserManager<ApplicationUser> _userManager;
+    private readonly IHttpContextAccessor _contextAccessor;
 
-    public UserService(UserManager<ApplicationUser> userManager)
+    public string UserId { get => _contextAccessor.HttpContext?.User?.FindFirst("uid").Value; }
+
+    public UserService(UserManager<ApplicationUser> userManager, IHttpContextAccessor contextAccessor)
     {
         _userManager = userManager;
+        _contextAccessor = contextAccessor;
     }
 
     public async Task<TaskManagerUser> GetUser(string userId)

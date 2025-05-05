@@ -6,7 +6,7 @@ using TaskManager.Application.Contracts.Logging;
 using TaskManager.Application.Contracts.Persistence;
 using TaskManager.Application.Exceptions;
 using TaskManager.Application.Features.WorkTaskPriorityType.Commands.UpdateWorkTaskPriorityType;
-using TaskManager.Application.MappingProfilesh;
+using TaskManager.Application.MappingProfiles;
 using TaskManager.Application.UnitTests.Mocks;
 
 namespace TaskManager.Application.UnitTests.Features.WorkTasksPriorityTypes.Commands;

@@ -15,4 +15,9 @@ public class WorkTaskPriorityTypeRepository : GenericRepository<WorkTaskPriority
     {
         return !await _context.WorkTaskPriorityTypes.AnyAsync(q => q.Name == name || q.PriorityWeight == weight);
     }
+
+    public async Task<bool> IsWorkPriorityTypeUpdateValid(string name, int weight, int id)
+    {
+        return !await _context.WorkTaskPriorityTypes.AnyAsync(q => (q.Name == name || q.PriorityWeight == weight) && q.Id != id);
+    }
 }

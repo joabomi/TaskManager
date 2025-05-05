@@ -7,11 +7,11 @@ using TaskManager.Application.Exceptions;
 using TaskManager.Application.Features.WorkTask.Queries.GetWorkTaskDetails;
 using TaskManager.Application.Features.WorkTaskPriorityType.Queries.GetAllWorkTaskPriorityTypes;
 using TaskManager.Application.Features.WorkTaskStatusType.Queries.GetAllWorkTaskStatusTypes;
-using TaskManager.Application.MappingProfilesh;
+using TaskManager.Application.MappingProfiles;
 using TaskManager.Application.UnitTests.Mocks;
 using TaskManager.Domain;
 
-namespace TaskManager.Application.UnitTests.Features.WorkTaskss.Queries;
+namespace TaskManager.Application.UnitTests.Features.WorkTasks.Queries;
 
 public class GetWorkTaskDetailsQueryHandlerTests
 {

@@ -1,0 +1,55 @@
+﻿@page "/prioritytypes/details/{id:int}"
+@using TaskManager.BlazorUI.Contracts
+@using TaskManager.BlazorUI.Models.WorkTaskPriorityTypes
+
+<h3>Priority Type Details</h3>
+
+<AuthorizeView>
+	<Authorized>
+		<div class="row">
+			<div class="col-md-4">
+
+				@if(Model != null)
+				{
+					<table class="table">
+						<thead>
+							<tr>
+								<th> Id </th>
+								<th> Name </th>
+								<th> Weight </th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td> @Model.Id </td>
+								<td> @Model.Name </td>
+								<td> @Model.PriorityWeight </td>
+							</tr>
+						</tbody>
+					</table>
+					<div>
+						<input type="button" value="Go Back" class="btn btn-outline-primary" onclick="@NavigationService.GoBack" />
+					</div>
+				}
+				else if (!string.IsNullOrEmpty(Message))
+				{
+					<div class="alert alert-danger">
+						@Message
+					</div>
+				}
+				else
+				{
+					<p>Loading...</p>
+				}
+			</div>
+		</div>
+	</Authorized>
+	<NotAuthorized>
+		<div class="alert alert-danger">
+			<p>You are not authorized to view this page.</p>
+			<p>User login with valid rights is required.</p>
+		</div>
+	</NotAuthorized>
+</AuthorizeView>
+
+
