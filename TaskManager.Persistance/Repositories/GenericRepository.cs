@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using TaskManager.Application.Contracts.Persistence;
+using TaskManager.Application.Exceptions;
+using TaskManager.Application.Models.Persistance;
 using TaskManager.Domain.Common;
 using TaskManager.Persistance.DatabaseContext;
 
@@ -46,5 +43,37 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
         _context.Entry(entity).State = EntityState.Modified;
         await _context.SaveChangesAsync();
+    }
+    public async Task<PagedResult<T>> GetPagedAsync(IQueryable<T> baseQuery, BaseQueryParameters parameters)
+    {
+        var totalCount = await baseQuery.CountAsync();
+
+        if (!string.IsNullOrEmpty(parameters.SortBy))
+        {
+            var property = typeof(T).GetProperty(parameters.SortBy);
+            if (property != null)
+            {
+                var ordering = parameters.SortDescending ? "descending" : "ascending";
+                baseQuery = System.Linq.Dynamic.Core.DynamicQueryableExtensions.OrderBy(baseQuery, $"{parameters.SortBy} {ordering}");
+            }
+            else
+            {
+                throw new BadRequestException($"Property '{parameters.SortBy}' does not exist on type '{typeof(T).Name}'. Valid properties are: {string.Join(", ", typeof(T).GetProperties().Select(p => p.Name))}.");
+
+            }
+        }
+
+        var items = await baseQuery
+            .Skip((parameters.PageNumber - 1) * parameters.PageSize)
+            .Take(parameters.PageSize)
+            .ToListAsync();
+
+        return new PagedResult<T>
+        {
+            Items = items,
+            TotalCount = totalCount,
+            PageNumber = parameters.PageNumber,
+            PageSize = parameters.PageSize
+        };
     }
 }
