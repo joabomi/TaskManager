@@ -22,12 +22,12 @@ public partial class Index
 
     protected void GoToLogin()
     {
-        NavigationManager.NavigateTo("login/");
+        NavigationManager.NavigateTo("/login");
     }
 
     protected void GoToRegister()
     {
-        NavigationManager.NavigateTo("register/");
+        NavigationManager.NavigateTo("/register");
     }
 
     protected async void Logout()

@@ -19,18 +19,20 @@ namespace TaskManager.BlazorUI.Services
 
         public void GoBack()
         {
+            Console.WriteLine(_navigationManager.Uri.ToString());
             var uri = new Uri(_navigationManager.Uri);
             var segments = uri.AbsolutePath
                 .Trim('/')
                 .Split('/')
                 .Where(s => !IsDynamicParameter(s))
                 .ToList();
-
-            if (segments.Count > 0)
+            Console.WriteLine($"Segments: {segments.Count}");
+            if (segments.Count > 1)
             {
                 var target = "/" + segments[0];
                 _navigationManager.NavigateTo(target);
-            }
+                Console.WriteLine("target: " + target);
+			}
             else
             {
                 _navigationManager.NavigateTo("/");

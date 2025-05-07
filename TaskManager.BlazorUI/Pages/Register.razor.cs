@@ -9,7 +9,7 @@ public partial class Register
 	public RegisterVM Model { get; set; }
 
 	[Inject]
-	public NavigationManager NavigationManager { get; set; }
+	public INavigationService NavigationService { get; set; }
 
 	public string Message { get; set; }
 
@@ -25,9 +25,10 @@ public partial class Register
 	{
 		var result = await AuthenticationService.RegisterAsync(Model.FirstName, Model.LastName, Model.Email, Model.Email, Model.Password);
 
-		if(result)
+		if (result)
 		{
-			NavigationManager.NavigateTo("home");
+			await AuthenticationService.AuthenticateAsync(Model.Email, Model.Password);
+			NavigationService.GoBack();
 		}
 		Message = "Something went wrong, please try again.";
 	}
