@@ -23,13 +23,20 @@ public partial class Register
 
 	protected async Task HandleRegister()
 	{
-		var result = await AuthenticationService.RegisterAsync(Model.FirstName, Model.LastName, Model.Email, Model.Email, Model.Password);
-
-		if (result)
+		if (Model.Password == Model.Password_Validation)
 		{
-			await AuthenticationService.AuthenticateAsync(Model.Email, Model.Password);
-			NavigationService.GoBack();
+			var result = await AuthenticationService.RegisterAsync(Model.FirstName, Model.LastName, Model.Email, Model.Email, Model.Password);
+
+			if (result)
+			{
+				await AuthenticationService.AuthenticateAsync(Model.Email, Model.Password);
+				NavigationService.GoBack();
+			}
+			Message = "Something went wrong, please try again.";
 		}
-		Message = "Something went wrong, please try again.";
+		else
+		{
+			Message = "Error, passwords doesn't match.";
+		}
 	}
 }
