@@ -5,6 +5,7 @@ using TaskManager.Application.Features.WorkTaskPriorityType.Queries.GetAllWorkTa
 using TaskManager.Application.Features.WorkTaskPriorityType.Commands.DeleteWorkTaskPriorityType;
 using TaskManager.Application.Features.WorkTaskPriorityType.Commands.UpdateWorkTaskPriorityType;
 using TaskManager.Application.Features.WorkTaskPriorityType.Commands.CreateWorkTaskPriorityType;
+using TaskManager.Application.Models.Persistance;
 
 namespace TaskManager.Application.MappingProfiles;
 
@@ -16,5 +17,6 @@ public class WorkTaskPriorityTypeProfile : Profile
         CreateMap<WorkTaskPriorityType, WorkTaskPriorityTypeDetailsDto>();
         CreateMap<CreateWorkTaskPriorityTypeCommand, WorkTaskPriorityType>();
         CreateMap<UpdateWorkTaskPriorityTypeCommand, WorkTaskPriorityType>();
+        CreateMap<GetAllWorkTaskPriorityTypesQuery, WorkTaskPriorityTypeQueryParameters>().ReverseMap();
     }
 }

@@ -37,7 +37,7 @@ public class GetAllWorkTaskPriorityTypesQueryHandlerTests
     {
         var handler = new GetAllWorkTaskPriorityTypesQueryHandler(_mapper, _mockRepo.Object, _mockAppLogger.Object);
 
-        var result = await handler.Handle(new GetAllWorkTaskPriorityTypesQuery(), CancellationToken.None);
+        var result = await handler.Handle(new GetAllWorkTaskPriorityTypesQuery(null, null, null, null), CancellationToken.None);
 
         result.ShouldNotBeNull();
         result.ShouldBeOfType<List<WorkTaskPriorityTypeDto>>();
