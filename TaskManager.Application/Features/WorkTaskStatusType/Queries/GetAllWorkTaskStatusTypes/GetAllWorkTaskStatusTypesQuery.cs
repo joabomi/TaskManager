@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
+using TaskManager.Application.Features.Common;
 
 namespace TaskManager.Application.Features.WorkTaskStatusType.Queries.GetAllWorkTaskStatusTypes
 {
-    public record GetAllWorkTaskStatusTypesQuery : IRequest<List<WorkTaskStatusTypeDto>>;
+    public record GetAllWorkTaskStatusTypesQuery : BaseQuery, IRequest<List<WorkTaskStatusTypeDto>>
+    {
+        public string? Name_Filter { get; set; }
+    }
 }

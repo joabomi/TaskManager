@@ -44,36 +44,36 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
         _context.Entry(entity).State = EntityState.Modified;
         await _context.SaveChangesAsync();
     }
-    public async Task<PagedResult<T>> GetPagedAsync(IQueryable<T> baseQuery, BaseQuery parameters)
+    public async Task<PagedResult<T>> GetPagedAsync(IQueryable<T> baseQuery, BaseQuery featureQuery)
     {
         var totalCount = await baseQuery.CountAsync();
 
-        if (!string.IsNullOrEmpty(parameters.SortBy))
+        if (!string.IsNullOrEmpty(featureQuery.SortBy))
         {
-            var property = typeof(T).GetProperty(parameters.SortBy);
+            var property = typeof(T).GetProperty(featureQuery.SortBy);
             if (property != null)
             {
-                var ordering = parameters.SortDescending ? "descending" : "ascending";
-                baseQuery = System.Linq.Dynamic.Core.DynamicQueryableExtensions.OrderBy(baseQuery, $"{parameters.SortBy} {ordering}");
+                var ordering = featureQuery.SortDescending ? "descending" : "ascending";
+                baseQuery = System.Linq.Dynamic.Core.DynamicQueryableExtensions.OrderBy(baseQuery, $"{featureQuery.SortBy} {ordering}");
             }
             else
             {
-                throw new BadRequestException($"Property '{parameters.SortBy}' does not exist on type '{typeof(T).Name}'. Valid properties are: {string.Join(", ", typeof(T).GetProperties().Select(p => p.Name))}.");
+                throw new BadRequestException($"Property '{featureQuery.SortBy}' does not exist on type '{typeof(T).Name}'. Valid properties are: {string.Join(", ", typeof(T).GetProperties().Select(p => p.Name))}.");
 
             }
         }
 
         var items = await baseQuery
-            .Skip((parameters.PageNumber - 1) * parameters.PageSize)
-            .Take(parameters.PageSize)
+            .Skip((featureQuery.PageNumber - 1) * featureQuery.PageSize)
+            .Take(featureQuery.PageSize)
             .ToListAsync();
 
         return new PagedResult<T>
         {
             Items = items,
             TotalCount = totalCount,
-            PageNumber = parameters.PageNumber,
-            PageSize = parameters.PageSize
+            PageNumber = featureQuery.PageNumber,
+            PageSize = featureQuery.PageSize
         };
     }
 }

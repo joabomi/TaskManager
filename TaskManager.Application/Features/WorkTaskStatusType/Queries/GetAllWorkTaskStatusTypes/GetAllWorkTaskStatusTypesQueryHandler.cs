@@ -23,9 +23,9 @@ public class GetAllWorkTaskStatusTypesQueryHandler : IRequestHandler<GetAllWorkT
     public async Task<List<WorkTaskStatusTypeDto>> Handle(GetAllWorkTaskStatusTypesQuery request, CancellationToken cancellationToken)
     {
         //query the database
-        var workTaskStatusTypes = await _workTaskStatusRepository.GetAsync();
+        var workTaskStatusTypes = await _workTaskStatusRepository.GetPagedAsync(request);
         //convert data to DTO
-        var ret_val = _mapper.Map<List<WorkTaskStatusTypeDto>>(workTaskStatusTypes);
+        var ret_val = _mapper.Map<List<WorkTaskStatusTypeDto>>(workTaskStatusTypes.Items);
         //return list DTO objects
         _logger.LogInformation("WorkTask Status Types were retrieved successfully");
         return ret_val;

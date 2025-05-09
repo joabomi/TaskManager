@@ -2,11 +2,13 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TaskManager.Application.Features.WorkTaskPriorityType.Queries.GetAllWorkTaskPriorityTypes;
 using TaskManager.Application.Features.WorkTaskStatusType.Commands.CreateWorkTaskStatusType;
 using TaskManager.Application.Features.WorkTaskStatusType.Commands.DeleteWorkTaskStatusType;
 using TaskManager.Application.Features.WorkTaskStatusType.Commands.UpdateWorkTaskStatusType;
 using TaskManager.Application.Features.WorkTaskStatusType.Queries.GetAllWorkTaskStatusTypes;
 using TaskManager.Application.Features.WorkTaskStatusType.Queries.GetWorkTaskStatusTypeDetails;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -25,9 +27,9 @@ public class WorkTaskStatusTypesController : ControllerBase
 
     // GET: api/<WorkTaskStatusTypesController>
     [HttpGet]
-    public async Task<ActionResult<List<WorkTaskStatusTypeDto>>> Get()
+    public async Task<ActionResult<List<WorkTaskStatusTypeDto>>> Get([FromQuery] GetAllWorkTaskStatusTypesQuery query)
     {
-        var workTaskStatusTypes = await _mediator.Send(new GetAllWorkTaskStatusTypesQuery());
+        var workTaskStatusTypes = await _mediator.Send(query);
         return Ok(workTaskStatusTypes);
     }
 
