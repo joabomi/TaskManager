@@ -6,8 +6,6 @@ using TaskManager.Application.Features.WorkTaskPriorityType.Commands.DeleteWorkT
 using TaskManager.Application.Features.WorkTaskPriorityType.Commands.UpdateWorkTaskPriorityType;
 using TaskManager.Application.Features.WorkTaskPriorityType.Queries.GetAllWorkTaskPriorityTypes;
 using TaskManager.Application.Features.WorkTaskPriorityType.Queries.GetWorkTaskPriorityDetails;
-using TaskManager.Application.Models.Persistance;
-using AutoMapper;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,20 +16,17 @@ namespace TaskManager.Api.Controllers;
 public class WorkTaskPriorityTypesController : ControllerBase
 {
     private readonly IMediator _mediator;
-    private readonly IMapper _mapper;
 
-    public WorkTaskPriorityTypesController(IMediator mediator, IMapper mapper)
+    public WorkTaskPriorityTypesController(IMediator mediator)
     {
         _mediator = mediator;
-        _mapper = mapper;
     }
 
     // GET: api/<WorkTaskPriorityTypesController>
     [HttpGet]
-    public async Task<ActionResult<List<WorkTaskPriorityTypeDto>>> Get([FromQuery] WorkTaskPriorityTypeQueryParameters query)
+    public async Task<ActionResult<List<WorkTaskPriorityTypeDto>>> Get([FromQuery] GetAllWorkTaskPriorityTypesQuery query)
     {
-        var mappedQuery = _mapper.Map<GetAllWorkTaskPriorityTypesQuery>(query);
-        var workTaskPriorityTypes = await _mediator.Send(mappedQuery);
+        var workTaskPriorityTypes = await _mediator.Send(query);
         return Ok(workTaskPriorityTypes);
     }
 

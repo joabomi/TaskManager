@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TaskManager.Application.Contracts.Persistence;
 using TaskManager.Application.Exceptions;
-using TaskManager.Application.Models.Persistance;
+using TaskManager.Application.Features.Common;
 using TaskManager.Domain.Common;
 using TaskManager.Persistance.DatabaseContext;
 
@@ -44,7 +44,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
         _context.Entry(entity).State = EntityState.Modified;
         await _context.SaveChangesAsync();
     }
-    public async Task<PagedResult<T>> GetPagedAsync(IQueryable<T> baseQuery, BaseQueryParameters parameters)
+    public async Task<PagedResult<T>> GetPagedAsync(IQueryable<T> baseQuery, BaseQuery parameters)
     {
         var totalCount = await baseQuery.CountAsync();
 

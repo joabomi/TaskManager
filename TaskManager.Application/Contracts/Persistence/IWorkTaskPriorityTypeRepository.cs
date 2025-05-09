@@ -1,4 +1,4 @@
-﻿using TaskManager.Application.Models.Persistance;
+﻿using TaskManager.Application.Features.WorkTaskPriorityType.Queries.GetAllWorkTaskPriorityTypes;
 using TaskManager.Domain;
 using TaskManager.Domain.Common;
 
@@ -10,6 +10,6 @@ namespace TaskManager.Application.Contracts.Persistence
 
         public Task<bool> IsWorkPriorityTypeUpdateValid(string name, int weight, int id);
 
-        public Task<PagedResult<WorkTaskPriorityType>> GetPagedAsync(WorkTaskPriorityTypeQueryParameters parameters);
+        public Task<PagedResult<WorkTaskPriorityType>> GetPagedAsync(GetAllWorkTaskPriorityTypesQuery query);
     }
 }

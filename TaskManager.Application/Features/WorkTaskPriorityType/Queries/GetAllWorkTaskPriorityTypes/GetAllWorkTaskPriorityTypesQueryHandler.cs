@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
 using TaskManager.Application.Contracts.Logging;
 using TaskManager.Application.Contracts.Persistence;
-using TaskManager.Application.Models.Persistance;
 
 namespace TaskManager.Application.Features.WorkTaskPriorityType.Queries.GetAllWorkTaskPriorityTypes;
 
@@ -29,8 +23,7 @@ public class GetAllWorkTaskPriorityTypesQueryHandler : IRequestHandler<GetAllWor
     public async Task<List<WorkTaskPriorityTypeDto>> Handle(GetAllWorkTaskPriorityTypesQuery request, CancellationToken cancellationToken)
     {
         //query the database
-        var queryParameters = _mapper.Map<WorkTaskPriorityTypeQueryParameters>(request);
-        var workTaskPriorityTypes = await _workTaskPriorityRepository.GetPagedAsync(queryParameters);
+        var workTaskPriorityTypes = await _workTaskPriorityRepository.GetPagedAsync(request);
         //convert data to DTO
         var ret_val = _mapper.Map<List<WorkTaskPriorityTypeDto>>(workTaskPriorityTypes.Items);
         //return list DTO objects

@@ -1,9 +1,20 @@
-﻿namespace TaskManager.Application.Features.Common;
+﻿using TaskManager.Application.Contracts.Persistence;
 
-public record BaseQuery
+namespace TaskManager.Application.Features.Common;
+
+public record BaseQuery : IPaginationParameters, ISortParameters
 {
-    public string? Sortby {get; set;}
+    private const int MaxPageSize = 20;
+
     public int PageNumber { get; set; } = 1;
-    public int PageSize { get; set; } = -1;
+
+    private int _pageSize = 50;
+    public int PageSize
+    {
+        get => _pageSize;
+        set => _pageSize = (value < 0 || value > MaxPageSize) ? MaxPageSize : value;
+    }
+
+    public string? SortBy { get; set; }
     public bool SortDescending { get; set; } = false;
 }
