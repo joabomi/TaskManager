@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Moq;
 using TaskManager.Application.Contracts.Persistence;
+using TaskManager.Application.Features.WorkTaskPriorityType.Queries.GetAllWorkTaskPriorityTypes;
 using TaskManager.Domain;
+using TaskManager.Domain.Common;
 
 namespace TaskManager.Application.UnitTests.Mocks;
 
@@ -45,6 +47,14 @@ public class MockWorkTaskPriorityTypeRepository
                 Name = "Higher",
                 PriorityWeight = 600,
             }
+        };
+
+        var pagedWorkTasks = new PagedResult<WorkTaskPriorityType>
+        {
+            TotalCount = workTaskPriorityTypes.Count,
+            PageNumber = 1,
+            PageSize = 10,
+            Items = workTaskPriorityTypes
         };
 
         var mockRepo = new Mock<IWorkTaskPriorityTypeRepository>();
@@ -100,6 +110,52 @@ public class MockWorkTaskPriorityTypeRepository
                 return Task.FromResult(res);
             });
 
+        mockRepo.Setup(r => r.GetPagedAsync(It.IsAny<GetAllWorkTaskPriorityTypesQuery>()))
+        .ReturnsAsync((GetAllWorkTaskPriorityTypesQuery query) =>
+        {
+            var filtered = workTaskPriorityTypes.AsQueryable();
+            return BaseRepositoryFeatures(query, ref filtered);
+        });
+
+
         return mockRepo;
+    }
+
+    private static PagedResult<WorkTaskPriorityType> BaseRepositoryFeatures(GetAllWorkTaskPriorityTypesQuery query, ref IQueryable<WorkTaskPriorityType> filtered)
+    {
+        // Apply filters:
+        if (!string.IsNullOrEmpty(query.Name_Filter))
+            filtered = filtered.Where(w => w.Name.Contains(query.Name_Filter));
+        else if(query.MinWeight_Filter != null)
+            filtered = filtered.Where(w => w.PriorityWeight >= query.MinWeight_Filter);
+        else if (query.MaxWeight_Filter != null)
+            filtered = filtered.Where(w => w.PriorityWeight <= query.MaxWeight_Filter);
+
+        //Apply sorting:
+        if (query.SortBy == "Name")
+        {
+            filtered = query.SortDescending ? filtered.OrderByDescending(w => w.Name) : filtered.OrderBy(w => w.Name);
+        }
+        if(query.SortBy == "PriorityWeight")
+        {
+            filtered = query.SortDescending ? filtered.OrderByDescending(w => w.PriorityWeight) : filtered.OrderBy(w => w.PriorityWeight);
+        }
+
+        // Total before pagination
+        var total = filtered.Count();
+
+        // Apply pagination
+        var items = filtered
+            .Skip((query.PageNumber - 1) * query.PageSize)
+            .Take(query.PageSize)
+            .ToList();
+
+        return new PagedResult<WorkTaskPriorityType>
+        {
+            TotalCount = total,
+            PageNumber = query.PageNumber,
+            PageSize = query.PageSize,
+            Items = items
+        };
     }
 }

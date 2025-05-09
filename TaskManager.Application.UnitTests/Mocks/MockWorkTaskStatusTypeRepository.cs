@@ -1,6 +1,9 @@
 ﻿using Moq;
 using TaskManager.Application.Contracts.Persistence;
+using TaskManager.Application.Features.WorkTask.Queries.GetAllWorkTasks;
+using TaskManager.Application.Features.WorkTaskStatusType.Queries.GetAllWorkTaskStatusTypes;
 using TaskManager.Domain;
+using TaskManager.Domain.Common;
 
 namespace TaskManager.Application.UnitTests.Mocks;
 
@@ -36,6 +39,14 @@ public class MockWorkTaskStatusTypeRepository
                 Id = 6,
                 Name = "Canceled"
             }
+        };
+
+        var pagedWorkTasks = new PagedResult<WorkTaskStatusType>
+        {
+            TotalCount = workTaskStatusTypes.Count,
+            PageNumber = 1,
+            PageSize = 10,
+            Items = workTaskStatusTypes
         };
 
         var mockRepo = new Mock<IWorkTaskStatusTypeRepository>();
@@ -85,6 +96,44 @@ public class MockWorkTaskStatusTypeRepository
                 return Task.FromResult(res);
             });
 
+        mockRepo.Setup(r => r.GetPagedAsync(It.IsAny<GetAllWorkTaskStatusTypesQuery>()))
+        .ReturnsAsync((GetAllWorkTaskStatusTypesQuery query) =>
+        {
+            var filtered = workTaskStatusTypes.AsQueryable();
+            return BaseRepositoryFeatures(query, ref filtered);
+        });
+
+
         return mockRepo;
+    }
+
+    private static PagedResult<WorkTaskStatusType> BaseRepositoryFeatures(GetAllWorkTaskStatusTypesQuery query,ref IQueryable<WorkTaskStatusType> filtered)
+    {
+        // Apply filters:
+        if (!string.IsNullOrEmpty(query.Name_Filter))
+            filtered = filtered.Where(w => w.Name.Contains(query.Name_Filter));
+
+        //Apply sorting:
+        if (query.SortBy == "Name")
+        {
+            filtered = query.SortDescending ? filtered.OrderByDescending(w => w.Name) : filtered.OrderBy(w => w.Name);
+        }
+
+        // Total before pagination
+        var total = filtered.Count();
+
+        // Apply pagination
+        var items = filtered
+            .Skip((query.PageNumber - 1) * query.PageSize)
+            .Take(query.PageSize)
+            .ToList();
+
+        return new PagedResult<WorkTaskStatusType>
+        {
+            TotalCount = total,
+            PageNumber = query.PageNumber,
+            PageSize = query.PageSize,
+            Items = items
+        };
     }
 }

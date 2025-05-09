@@ -1,6 +1,8 @@
 ﻿using Moq;
 using TaskManager.Application.Contracts.Persistence;
+using TaskManager.Application.Features.WorkTask.Queries.GetAllWorkTasks;
 using TaskManager.Domain;
+using TaskManager.Domain.Common;
 
 namespace TaskManager.Application.UnitTests.Mocks;
 
@@ -107,6 +109,14 @@ public class MockWorkTaskRepository
             }
         };
 
+        var pagedWorkTasks = new PagedResult<WorkTask>
+        {
+            TotalCount = workTasks.Count,
+            PageNumber = 1,
+            PageSize = 10,
+            Items = workTasks
+        };
+
         var mockRepo = new Mock<IWorkTaskRepository>();
 
         mockRepo.Setup(r => r.GetAsync()).ReturnsAsync(workTasks);
@@ -178,7 +188,94 @@ public class MockWorkTaskRepository
             return Task.FromResult(newList.ToList());
         });
 
+        mockRepo.Setup(r => r.GetWorkTasksWithDetails(It.IsAny<GetAllWorkTasksQuery>()))
+        .ReturnsAsync((GetAllWorkTasksQuery query) =>
+        {
+            var filtered = workTasks.AsQueryable();
+            return BaseRepositoryFeatures(query, workTaskPriorityTypes, workTaskStatusTypes, ref filtered);
+        });
+
+        mockRepo.Setup(r => r.GetWorkTasksWithDetails(It.IsAny<string>(), It.IsAny<GetAllWorkTasksQuery>()))
+        .ReturnsAsync((string assignedPersonId, GetAllWorkTasksQuery query) =>
+        {
+            var filtered = workTasks.Where(wt => wt.AssignedPersonId == assignedPersonId).AsQueryable();
+            return BaseRepositoryFeatures(query, workTaskPriorityTypes, workTaskStatusTypes, ref filtered);
+        });
+
+
         return mockRepo;
+    }
+
+    private static PagedResult<WorkTask> BaseRepositoryFeatures(GetAllWorkTasksQuery query, List<WorkTaskPriorityType> workTaskPriorityTypes, List<WorkTaskStatusType> workTaskStatusTypes, ref IQueryable<WorkTask> filtered)
+    {
+        // Apply filters:
+        if (!string.IsNullOrEmpty(query.Name_Filter))
+            filtered = filtered.Where(w => w.Name.Contains(query.Name_Filter));
+        if (!string.IsNullOrEmpty(query.Description_Filter))
+            filtered = filtered.Where(w => w.Description.Contains(query.Description_Filter));
+        if (query.PriorityId_Filter.HasValue)
+            filtered = filtered.Where(w => w.PriorityId == query.PriorityId_Filter.Value);
+        if (query.StatusId_Filter.HasValue)
+            filtered = filtered.Where(w => w.StatusId == query.StatusId_Filter.Value);
+        if (query.From_StartDate.HasValue)
+            filtered = filtered.Where(w => w.StartDate >= query.From_StartDate.Value);
+        if (query.To_StartDate.HasValue)
+            filtered = filtered.Where(w => w.StartDate <= query.To_StartDate.Value);
+        if (query.From_EndDate.HasValue)
+            filtered = filtered.Where(w => w.EndDate >= query.From_EndDate.Value);
+        if (query.To_EndDate.HasValue)
+            filtered = filtered.Where(w => w.EndDate <= query.To_EndDate.Value);
+        if (!string.IsNullOrEmpty(query.AssignedPersonId_Filter))
+            filtered = filtered.Where(w => w.AssignedPersonId == query.AssignedPersonId_Filter);
+
+        //Apply sorting:
+        if (query.SortBy == "Name")
+        {
+            filtered = query.SortDescending ? filtered.OrderByDescending(w => w.Name) : filtered.OrderBy(w => w.Name);
+        }
+        else if (query.SortBy == "Description")
+        {
+            filtered = query.SortDescending ? filtered.OrderByDescending(w => w.Description) : filtered.OrderBy(w => w.Description);
+        }
+        else if (query.SortBy == "StatusId")
+        {
+            filtered = query.SortDescending ? filtered.OrderByDescending(w => w.StatusId) : filtered.OrderBy(w => w.StatusId);
+        }
+        else if (query.SortBy == "PriorityId")
+        {
+            filtered = query.SortDescending ? filtered.OrderByDescending(w => w.PriorityId) : filtered.OrderBy(w => w.PriorityId);
+        }
+        else if (query.SortBy == "StartDate")
+        {
+            filtered = query.SortDescending ? filtered.OrderByDescending(w => w.StartDate) : filtered.OrderBy(w => w.StartDate);
+        }
+        else if (query.SortBy == "EndDate")
+        {
+            filtered = query.SortDescending ? filtered.OrderByDescending(w => w.EndDate) : filtered.OrderBy(w => w.EndDate);
+        }
+        else if (query.SortBy == "AssignedPersonId")
+        {
+            filtered = query.SortDescending ? filtered.OrderByDescending(w => w.AssignedPersonId) : filtered.OrderBy(w => w.AssignedPersonId);
+        }
+
+        // Total before pagination
+        var total = filtered.Count();
+
+        // Apply pagination
+        var items = filtered
+            .Skip((query.PageNumber - 1) * query.PageSize)
+            .Take(query.PageSize)
+            .ToList();
+
+        SetWorkTasksListDetails(workTaskPriorityTypes, workTaskStatusTypes, items);
+
+        return new PagedResult<WorkTask>
+        {
+            TotalCount = total,
+            PageNumber = query.PageNumber,
+            PageSize = query.PageSize,
+            Items = items
+        };
     }
 
     private static void SetWorkTasksListDetails(List<WorkTaskPriorityType> workTaskPriorityTypes, List<WorkTaskStatusType> workTaskStatusTypes, List<WorkTask> workTasks)
