@@ -25,9 +25,9 @@ public class WorkTasksController : ControllerBase
 
     // GET: api/<WorkTasksController>
     [HttpGet]
-    public async Task<ActionResult<List<WorkTaskDto>>> Get(bool isLoggedUser = false, bool isLoggedAdmin = false)
+    public async Task<ActionResult<List<WorkTaskDto>>> Get([FromQuery] GetAllWorkTasksQuery query)
     {
-        var workTasks = await _mediator.Send(new GetAllWorkTasksQuery(isLoggedUser, isLoggedAdmin));
+        var workTasks = await _mediator.Send(query);
         return Ok(workTasks);
     }
 

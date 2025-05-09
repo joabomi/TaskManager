@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
 using TaskManager.Application.Contracts.Identity;
 using TaskManager.Application.Contracts.Logging;
 using TaskManager.Application.Contracts.Persistence;
+using TaskManager.Domain.Common;
 
 namespace TaskManager.Application.Features.WorkTask.Queries.GetAllWorkTasks;
 
@@ -29,22 +25,22 @@ public class GetAllWorkTasksQueryHandler : IRequestHandler<GetAllWorkTasksQuery,
         _userService = userService;
     }
 
-    public async Task<List<WorkTaskDto>> Handle(GetAllWorkTasksQuery request, CancellationToken cancellationToken)
+    public async Task<List<WorkTaskDto>> Handle(GetAllWorkTasksQuery query, CancellationToken cancellationToken)
     {
-        var ret_val = new List<WorkTaskDto>();
-        var workTasks = await _workTaskRepository.GetWorkTasksWithDetails();
-        List<Domain.WorkTask> targetWorkTasks = new List<Domain.WorkTask>();
         //query the database
-        if (request.IsLoggedUser)
+        PagedResult<Domain.WorkTask> workTasks = new PagedResult<Domain.WorkTask>();
+        if (query.IsLoggedUser)
         {
-            targetWorkTasks = workTasks.Where(x => x.AssignedPersonId == _userService.UserId).ToList();
+            workTasks = await _workTaskRepository.GetWorkTasksWithDetails(_userService.UserId, query);
         }
-        else if (request.IsLoggedAdmin)
+        else if (query.IsLoggedAdmin)
         {
-            targetWorkTasks = workTasks;
+            workTasks = await _workTaskRepository.GetWorkTasksWithDetails(query);
         }
+
         //convert data to DTO
-        ret_val = _mapper.Map<List<WorkTaskDto>>(targetWorkTasks);
+        var ret_val = _mapper.Map<List<WorkTaskDto>>(workTasks.Items);
+
         //return list DTO objects
         _logger.LogInformation("Work Tasks were retrieved successfully");
         return ret_val;
