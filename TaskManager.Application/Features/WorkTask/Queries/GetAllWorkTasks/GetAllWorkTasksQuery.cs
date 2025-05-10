@@ -5,9 +5,6 @@ namespace TaskManager.Application.Features.WorkTask.Queries.GetAllWorkTasks;
 
 public record GetAllWorkTasksQuery() : BaseQuery, IRequest<List<WorkTaskDto>>
 {
-    public bool IsLoggedUser { get; set; } = false;
-    public bool IsLoggedAdmin { get; set; } = false;
-
     public string? Name_Filter { get; set; }
     public string? Description_Filter { get; set; }
     public int? StatusId_Filter { get; set; }

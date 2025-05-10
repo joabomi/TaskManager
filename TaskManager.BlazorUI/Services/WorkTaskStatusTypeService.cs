@@ -58,7 +58,7 @@ namespace TaskManager.BlazorUI.Services
 
         public async Task<List<WorkTaskStatusTypeVM>> GetWorkTaskStatusTypes()
         {
-            var workTaskStatusTypes = await _client.WorkTaskStatusTypesAllAsync();
+            var workTaskStatusTypes = await _client.WorkTaskStatusTypesAllAsync(null, null, null, null, null);
             return _mapper.Map<List<WorkTaskStatusTypeVM>>(workTaskStatusTypes);
         }
 

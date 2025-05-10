@@ -17,7 +17,9 @@ public class UserService : IUserService
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly IHttpContextAccessor _contextAccessor;
 
-    public string UserId { get => _contextAccessor.HttpContext?.User?.FindFirst("uid").Value; }
+    public string UserId { get => _contextAccessor.HttpContext?.User?.FindFirst("uid").Value ?? string.Empty; }
+    public bool IsLoggedAdmin { get => _contextAccessor.HttpContext?.User?.IsInRole("Administrator") ?? false; }
+    public bool IsLoggedUser { get => _contextAccessor.HttpContext?.User?.IsInRole("TaskManagerUser") ?? false; }
 
     public UserService(UserManager<ApplicationUser> userManager, IHttpContextAccessor contextAccessor)
     {

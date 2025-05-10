@@ -61,17 +61,15 @@ public partial class Index
             bool isUser = user.IsInRole("TaskManagerUser");
             Console.WriteLine($"Is User: {isUser}");
             _canDelete = isAdmin;
+            WorkTasks = await WorkTaskService.GetWorkTasks();
             if (isAdmin)
             {
-                WorkTasks = await WorkTaskService.GetAdminWorkTasks();
 
                 var users = await UserService.GetUsers();
                 UserNamesById = users.ToDictionary(user => user.Id, user => $"{user.FirstName} {user.LastName}");
             }
             else if (isUser)
             {
-                WorkTasks = await WorkTaskService.GetUserWorkTasks();
-                Console.WriteLine($"WorkTasks: {WorkTasks.Count}");
                 var id = user.Claims.Where(c => c.Type == "uid").FirstOrDefault()?.Value;
                 if(!string.IsNullOrEmpty(id))
                 {

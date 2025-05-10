@@ -65,12 +65,12 @@ namespace TaskManager.BlazorUI.Services.Base
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskPriorityTypeDto>> WorkTaskPriorityTypesAllAsync();
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskPriorityTypeDto>> WorkTaskPriorityTypesAllAsync(string name_Filter, int? minWeight_Filter, int? maxWeight_Filter, int? pageNumber, int? pageSize, string sortBy, bool? sortDescending);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskPriorityTypeDto>> WorkTaskPriorityTypesAllAsync(System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskPriorityTypeDto>> WorkTaskPriorityTypesAllAsync(string name_Filter, int? minWeight_Filter, int? maxWeight_Filter, int? pageNumber, int? pageSize, string sortBy, bool? sortDescending, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -110,12 +110,12 @@ namespace TaskManager.BlazorUI.Services.Base
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskDto>> WorkTasksAllAsync(bool? isLoggedUser, bool? isLoggedAdmin);
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskDto>> WorkTasksAllAsync(string? name_Filter, string? description_Filter, int? statusId_Filter, int? priorityId_Filter, System.DateTimeOffset? from_StartDate, System.DateTimeOffset? to_StartDate, System.DateTimeOffset? from_EndDate, System.DateTimeOffset? to_EndDate, string? assignedPersonId_Filter, int? pageNumber, int? pageSize, string? sortBy, bool? sortDescending);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskDto>> WorkTasksAllAsync(bool? isLoggedUser, bool? isLoggedAdmin, System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskDto>> WorkTasksAllAsync(string? name_Filter, string? description_Filter, int? statusId_Filter, int? priorityId_Filter, System.DateTimeOffset? from_StartDate, System.DateTimeOffset? to_StartDate, System.DateTimeOffset? from_EndDate, System.DateTimeOffset? to_EndDate, string? assignedPersonId_Filter, int? pageNumber, int? pageSize, string? sortBy, bool? sortDescending, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -155,12 +155,12 @@ namespace TaskManager.BlazorUI.Services.Base
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskStatusTypeDto>> WorkTaskStatusTypesAllAsync();
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskStatusTypeDto>> WorkTaskStatusTypesAllAsync(string name_Filter, int? pageNumber, int? pageSize, string sortBy, bool? sortDescending);
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskStatusTypeDto>> WorkTaskStatusTypesAllAsync(System.Threading.CancellationToken cancellationToken);
+        System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskStatusTypeDto>> WorkTaskStatusTypesAllAsync(string name_Filter, int? pageNumber, int? pageSize, string sortBy, bool? sortDescending, System.Threading.CancellationToken cancellationToken);
 
         /// <returns>Created</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
@@ -558,15 +558,15 @@ namespace TaskManager.BlazorUI.Services.Base
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskPriorityTypeDto>> WorkTaskPriorityTypesAllAsync()
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskPriorityTypeDto>> WorkTaskPriorityTypesAllAsync(string name_Filter, int? minWeight_Filter, int? maxWeight_Filter, int? pageNumber, int? pageSize, string sortBy, bool? sortDescending)
         {
-            return WorkTaskPriorityTypesAllAsync(System.Threading.CancellationToken.None);
+            return WorkTaskPriorityTypesAllAsync(name_Filter, minWeight_Filter, maxWeight_Filter, pageNumber, pageSize, sortBy, sortDescending, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskPriorityTypeDto>> WorkTaskPriorityTypesAllAsync(System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskPriorityTypeDto>> WorkTaskPriorityTypesAllAsync(string name_Filter, int? minWeight_Filter, int? maxWeight_Filter, int? pageNumber, int? pageSize, string sortBy, bool? sortDescending, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -581,6 +581,36 @@ namespace TaskManager.BlazorUI.Services.Base
                 
                     // Operation Path: "api/WorkTaskPriorityTypes"
                     urlBuilder_.Append("api/WorkTaskPriorityTypes");
+                    urlBuilder_.Append('?');
+                    if (name_Filter != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("Name_Filter")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(name_Filter, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (minWeight_Filter != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("MinWeight_Filter")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(minWeight_Filter, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (maxWeight_Filter != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("MaxWeight_Filter")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(maxWeight_Filter, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (pageNumber != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("PageNumber")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(pageNumber, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (pageSize != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("PageSize")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(pageSize, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (sortBy != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("SortBy")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(sortBy, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (sortDescending != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("SortDescending")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(sortDescending, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -1004,15 +1034,15 @@ namespace TaskManager.BlazorUI.Services.Base
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskDto>> WorkTasksAllAsync(bool? isLoggedUser, bool? isLoggedAdmin)
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskDto>> WorkTasksAllAsync(string name_Filter, string description_Filter, int? statusId_Filter, int? priorityId_Filter, System.DateTimeOffset? from_StartDate, System.DateTimeOffset? to_StartDate, System.DateTimeOffset? from_EndDate, System.DateTimeOffset? to_EndDate, string assignedPersonId_Filter, int? pageNumber, int? pageSize, string sortBy, bool? sortDescending)
         {
-            return WorkTasksAllAsync(isLoggedUser, isLoggedAdmin, System.Threading.CancellationToken.None);
+            return WorkTasksAllAsync(name_Filter, description_Filter, statusId_Filter, priorityId_Filter, from_StartDate, to_StartDate, from_EndDate, to_EndDate, assignedPersonId_Filter, pageNumber, pageSize, sortBy, sortDescending, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskDto>> WorkTasksAllAsync(bool? isLoggedUser, bool? isLoggedAdmin, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskDto>> WorkTasksAllAsync(string name_Filter, string description_Filter, int? statusId_Filter, int? priorityId_Filter, System.DateTimeOffset? from_StartDate, System.DateTimeOffset? to_StartDate, System.DateTimeOffset? from_EndDate, System.DateTimeOffset? to_EndDate, string assignedPersonId_Filter, int? pageNumber, int? pageSize, string sortBy, bool? sortDescending, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -1028,13 +1058,57 @@ namespace TaskManager.BlazorUI.Services.Base
                     // Operation Path: "api/WorkTasks"
                     urlBuilder_.Append("api/WorkTasks");
                     urlBuilder_.Append('?');
-                    if (isLoggedUser != null)
+                    if (name_Filter != null)
                     {
-                        urlBuilder_.Append(System.Uri.EscapeDataString("isLoggedUser")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(isLoggedUser, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                        urlBuilder_.Append(System.Uri.EscapeDataString("Name_Filter")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(name_Filter, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
                     }
-                    if (isLoggedAdmin != null)
+                    if (description_Filter != null)
                     {
-                        urlBuilder_.Append(System.Uri.EscapeDataString("isLoggedAdmin")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(isLoggedAdmin, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                        urlBuilder_.Append(System.Uri.EscapeDataString("Description_Filter")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(description_Filter, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (statusId_Filter != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("StatusId_Filter")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(statusId_Filter, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (priorityId_Filter != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("PriorityId_Filter")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(priorityId_Filter, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (from_StartDate != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("From_StartDate")).Append('=').Append(System.Uri.EscapeDataString(from_StartDate.Value.ToString("s", System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (to_StartDate != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("To_StartDate")).Append('=').Append(System.Uri.EscapeDataString(to_StartDate.Value.ToString("s", System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (from_EndDate != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("From_EndDate")).Append('=').Append(System.Uri.EscapeDataString(from_EndDate.Value.ToString("s", System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (to_EndDate != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("To_EndDate")).Append('=').Append(System.Uri.EscapeDataString(to_EndDate.Value.ToString("s", System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (assignedPersonId_Filter != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("AssignedPersonId_Filter")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(assignedPersonId_Filter, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (pageNumber != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("PageNumber")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(pageNumber, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (pageSize != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("PageSize")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(pageSize, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (sortBy != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("SortBy")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(sortBy, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (sortDescending != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("SortDescending")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(sortDescending, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
                     }
                     urlBuilder_.Length--;
 
@@ -1460,15 +1534,15 @@ namespace TaskManager.BlazorUI.Services.Base
 
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskStatusTypeDto>> WorkTaskStatusTypesAllAsync()
+        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskStatusTypeDto>> WorkTaskStatusTypesAllAsync(string name_Filter, int? pageNumber, int? pageSize, string sortBy, bool? sortDescending)
         {
-            return WorkTaskStatusTypesAllAsync(System.Threading.CancellationToken.None);
+            return WorkTaskStatusTypesAllAsync(name_Filter, pageNumber, pageSize, sortBy, sortDescending, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>OK</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskStatusTypeDto>> WorkTaskStatusTypesAllAsync(System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<WorkTaskStatusTypeDto>> WorkTaskStatusTypesAllAsync(string name_Filter, int? pageNumber, int? pageSize, string sortBy, bool? sortDescending, System.Threading.CancellationToken cancellationToken)
         {
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -1483,6 +1557,28 @@ namespace TaskManager.BlazorUI.Services.Base
                 
                     // Operation Path: "api/WorkTaskStatusTypes"
                     urlBuilder_.Append("api/WorkTaskStatusTypes");
+                    urlBuilder_.Append('?');
+                    if (name_Filter != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("Name_Filter")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(name_Filter, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (pageNumber != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("PageNumber")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(pageNumber, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (pageSize != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("PageSize")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(pageSize, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (sortBy != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("SortBy")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(sortBy, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    if (sortDescending != null)
+                    {
+                        urlBuilder_.Append(System.Uri.EscapeDataString("SortDescending")).Append('=').Append(System.Uri.EscapeDataString(ConvertToString(sortDescending, System.Globalization.CultureInfo.InvariantCulture))).Append('&');
+                    }
+                    urlBuilder_.Length--;
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -2180,11 +2276,11 @@ namespace TaskManager.BlazorUI.Services.Base
         [System.Text.Json.Serialization.JsonPropertyName("endDate")]
         public System.DateTimeOffset EndDate { get; set; }
 
-        [System.Text.Json.Serialization.JsonPropertyName("id")]
-        public int Id { get; set; }
-
         [System.Text.Json.Serialization.JsonPropertyName("assignedPersonId")]
         public string AssignedPersonId { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+        public int Id { get; set; }
 
     }
 

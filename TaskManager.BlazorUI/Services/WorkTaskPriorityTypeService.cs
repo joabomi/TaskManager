@@ -58,7 +58,7 @@ namespace TaskManager.BlazorUI.Services
 
         public async Task<List<WorkTaskPriorityTypeVM>> GetWorkTaskPriorityTypes()
         {
-            var workTaskPriorityTypes = await _client.WorkTaskPriorityTypesAllAsync();
+            var workTaskPriorityTypes = await _client.WorkTaskPriorityTypesAllAsync(null, null, null, null, null, null, null);
             return _mapper.Map<List<WorkTaskPriorityTypeVM>>(workTaskPriorityTypes);
         }
 

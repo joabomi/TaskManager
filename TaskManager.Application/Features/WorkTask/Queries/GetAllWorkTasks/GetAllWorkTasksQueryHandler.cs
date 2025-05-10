@@ -29,11 +29,11 @@ public class GetAllWorkTasksQueryHandler : IRequestHandler<GetAllWorkTasksQuery,
     {
         //query the database
         PagedResult<Domain.WorkTask> workTasks = new PagedResult<Domain.WorkTask>();
-        if (query.IsLoggedUser)
+        if (_userService.IsLoggedUser)
         {
             workTasks = await _workTaskRepository.GetWorkTasksWithDetails(_userService.UserId, query);
         }
-        else if (query.IsLoggedAdmin)
+        else if (_userService.IsLoggedAdmin)
         {
             workTasks = await _workTaskRepository.GetWorkTasksWithDetails(query);
         }
